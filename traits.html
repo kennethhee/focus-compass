@@ -144,6 +144,10 @@
       box-sizing: border-box;
     }
 
+    [hidden] {
+      display: none !important;
+    }
+
     body {
       margin: 0;
       font-family: var(--font-body);
@@ -1571,6 +1575,7 @@
       const activeQs = getActiveQuestions();
       const total = activeQs.length;
       const answeredCount = activeQs.filter((q) => responses[q.order] !== undefined).length;
+      const allCompleted = answeredCount === total;
 
       progressEl.max = total;
       progressEl.value = answeredCount;
@@ -1588,7 +1593,7 @@
         prevPageBtn.hidden = currentPage === 0;
         const isLastPage = currentPage >= totalPages - 1;
         nextPageBtn.hidden = isLastPage;
-        submitBtn.hidden = !isLastPage;
+        submitBtn.hidden = !(isLastPage || allCompleted);
       }
     }
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Focus &amp; Executive Function Assessment Suite</title>
-  <meta name="description" content="Self-guided 6-dimension ADHD trait profiler (20 or 100 items) and WHO ASRS-v1.1 18-item clinical threshold screener.">
+  <meta name="description" content="Self-guided 6-dimension ADHD trait profiler (20 or 100 items) with automated deep-dive clinical insights and WHO ASRS-v1.1 18-item screener.">
   <style>
     :root,
     :root[data-theme="botanical"] {
@@ -158,7 +158,8 @@
       .trait-card,
       .metric-box,
       .results-card,
-      .suite-tab {
+      .suite-tab,
+      .insight-card {
         border: 2px solid CanvasText;
       }
       .option-label:has(input:checked),
@@ -172,6 +173,11 @@
       box-sizing: border-box;
     }
 
+    /* Critical fix: ensure [hidden] always wins over author display properties */
+    [hidden] {
+      display: none !important;
+    }
+
     body {
       margin: 0;
       font-family: var(--font-body);
@@ -183,7 +189,7 @@
       transition: background-color 0.2s ease, color 0.2s ease;
     }
 
-    h1, h2, h3 {
+    h1, h2, h3, h4 {
       font-family: var(--font-heading);
     }
 
@@ -461,7 +467,7 @@
     }
 
     .btn-primary:hover {
-      background-color: var(--brand-hover);
+      background: var(--brand-hover);
       border-color: var(--brand-hover);
     }
 
@@ -806,7 +812,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 1rem;
-      margin-block-end: 1.5rem;
+      margin-block-end: 1.75rem;
     }
 
     .trait-card, .metric-box {
@@ -845,7 +851,7 @@
     .metric-sub {
       font-size: 0.84rem;
       color: var(--text-muted);
-      margin-block-top: 0.2rem;
+      margin-block-start: 0.2rem;
     }
 
     .bar-track {
@@ -866,6 +872,61 @@
       margin: 0.5rem 0 0;
       font-size: 0.85rem;
       color: var(--text-muted);
+    }
+
+    /* Deep-Dive Insights Section */
+    .insights-section {
+      margin-block: 1.75rem;
+      border-block-start: 1px solid var(--border-subtle);
+      padding-block-start: 1.5rem;
+    }
+
+    .insights-section h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1.25rem;
+    }
+
+    .insights-lead {
+      margin: 0 0 1.25rem;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-block-end: 1.25rem;
+    }
+
+    .insight-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-inline-start: 4px solid var(--brand-color);
+      border-radius: calc(var(--radius) - 2px);
+      padding: 1rem 1.15rem;
+    }
+
+    .insight-card h4 {
+      margin: 0 0 0.4rem;
+      font-size: 1rem;
+    }
+
+    .insight-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .insight-list {
+      margin: 0.5rem 0 0;
+      padding-inline-start: 1.15rem;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .insight-list li {
+      margin-block-end: 0.35rem;
     }
 
     .disclaimer-box {
@@ -986,7 +1047,7 @@
     <div class="suite-tabs no-print" role="tablist" aria-label="Select Assessment Type">
       <button type="button" role="tab" class="suite-tab" id="tab-trait" aria-selected="true" aria-controls="panel-trait">
         <span class="suite-tab-title">1. 6-Dimension Trait Profile (20 or 100 Items)</span>
-        <span class="suite-tab-desc">Maps Inattentive, Hyperactive, Impulsive, Executive Function, Emotional Sensitivity &amp; Hyperfocus with a 6-axis radar chart.</span>
+        <span class="suite-tab-desc">Maps Inattentive, Hyperactive, Impulsive, Executive Function, Emotional Sensitivity &amp; Hyperfocus with automated sub-pattern insights.</span>
       </button>
       <button type="button" role="tab" class="suite-tab" id="tab-asrs" aria-selected="false" aria-controls="panel-asrs">
         <span class="suite-tab-title">2. WHO ASRS-v1.1 Clinical Screener (18 Items)</span>
@@ -1028,7 +1089,7 @@
           <span id="trait-validation-summary" role="alert" style="color: var(--status-positive-text); font-weight: 600;"></span>
           <div style="display: flex; gap: 0.75rem;">
             <button type="button" class="btn btn-primary" id="next-page-btn" enterkeyhint="next">Next Page</button>
-            <button type="submit" class="btn btn-primary" id="submit-trait-btn">Generate Trait Report</button>
+            <button type="submit" class="btn btn-primary" id="submit-trait-btn" hidden>Generate Trait Report</button>
           </div>
         </div>
       </form>
@@ -1744,7 +1805,7 @@
     ];
 
     const PAGE_SIZE = 5;
-    let activeSuite = "trait"; // "trait" | "asrs"
+    let activeSuite = "trait";
     let traitMode = "quick20";
     let showAllPages = false;
     let currentPage = 0;
@@ -1761,7 +1822,6 @@
     const panelTrait = document.getElementById("panel-trait");
     const panelAsrs = document.getElementById("panel-asrs");
 
-    // Trait elements
     const traitQuestionsContainer = document.getElementById("trait-questions-container");
     const pageCounterLabel = document.getElementById("page-counter-label");
     const prevPageBtn = document.getElementById("prev-page-btn");
@@ -1775,7 +1835,6 @@
     const traitResultsRegion = document.getElementById("trait-results-region");
     const traitForm = document.getElementById("trait-form");
 
-    // ASRS elements
     const asrsPartA = document.getElementById("asrs-part-a");
     const asrsPartB = document.getElementById("asrs-part-b");
     const asrsForm = document.getElementById("asrs-form");
@@ -1846,6 +1905,8 @@
         const activeQs = getActiveTraitQuestions();
         const total = activeQs.length;
         const answered = activeQs.filter((q) => traitResponses[q.order] !== undefined).length;
+        const allCompleted = answered === total;
+
         progressEl.max = total;
         progressEl.value = answered;
         progressEl.textContent = `${Math.round((answered / total) * 100)}%`;
@@ -1858,11 +1919,12 @@
           nextPageBtn.hidden = true;
           submitTraitBtn.hidden = false;
         } else {
+          const isLast = currentPage >= totalPages - 1;
           pageCounterLabel.textContent = `Step ${currentPage + 1} of ${totalPages} (${PAGE_SIZE} statements per page)`;
           prevPageBtn.hidden = currentPage === 0;
-          const isLast = currentPage >= totalPages - 1;
+          // Hide Next Page on the final page, and always show Generate Trait Report when on the last page OR when all questions are already answered
           nextPageBtn.hidden = isLast;
-          submitTraitBtn.hidden = !isLast;
+          submitTraitBtn.hidden = !(isLast || allCompleted);
         }
       } else {
         const answered = ASRS_QUESTIONS.filter((q) => asrsResponses[q.id] !== undefined).length;
@@ -1977,7 +2039,6 @@
       });
     }
 
-    // Trait interactions
     traitForm.addEventListener("input", (e) => {
       if (e.target.matches('input[type="radio"]')) {
         const qorder = Number(e.target.name.replace("tq", ""));
@@ -2053,6 +2114,8 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
         const firstRadio = traitQuestionsContainer.querySelector('input[type="radio"]');
         if (firstRadio) firstRadio.focus({ preventScroll: true });
+      } else {
+        traitForm.requestSubmit();
       }
     });
 
@@ -2131,6 +2194,103 @@
       `;
     }
 
+    function generatePersonalizedInsights(traitTotals, activeQs) {
+      const scoreOf = (order) => traitResponses[order];
+      const avgOf = (orders) => {
+        const valid = orders.map(scoreOf).filter((v) => v !== undefined);
+        if (!valid.length) return null;
+        return valid.reduce((a, b) => a + b, 0) / (valid.length * 4);
+      };
+
+      const cards = [];
+      const strategies = [];
+
+      // 1. Internalized vs Externalized Restlessness
+      const emoPct = traitTotals.Emotional.pct;
+      const execPct = traitTotals.Executive.pct;
+      const hypPct = traitTotals.Hyperactive.pct;
+      const mentalRestless = avgOf([20, 38, 55, 62]);
+      const physicalRestless = avgOf([50, 68, 74, 80, 98]);
+
+      if (emoPct >= 65 && hypPct <= 45) {
+        cards.push({
+          title: "Internalized Overdrive (Mental vs. Physical)",
+          body: `Your Emotional Sensitivity (${emoPct}%) and Executive load (${execPct}%) are significantly higher than your Physical Hyperactivity (${hypPct}%). Rather than outward physical restlessness, your energy is concentrated internally—experiencing "20 tabs open" mental activity, sensory/crowd fatigue, and high internal pressure.`
+        });
+      } else if (mentalRestless !== null && physicalRestless !== null && mentalRestless - physicalRestless >= 0.25) {
+        cards.push({
+          title: "Cognitive Restlessness Over Motor Hyperactivity",
+          body: `Your responses show high mental speed (${Math.round(mentalRestless * 100)}% on racing thoughts/inner tension) paired with low physical restlessness (${Math.round(physicalRestless * 100)}% on pacing/staying seated).`
+        });
+      }
+
+      // 2. Executive Sub-pattern: Structure vs Overwhelm Paralysis
+      const punctualityAndStructure = avgOf([10, 40, 46, 64, 67, 73, 88]);
+      const overwhelmParalysis = avgOf([16, 52, 58, 76, 82, 99]);
+
+      if (overwhelmParalysis !== null && punctualityAndStructure !== null && overwhelmParalysis >= 0.65 && punctualityAndStructure <= 0.35) {
+        cards.push({
+          title: "Compensated Structure vs. Overwhelm Paralysis",
+          body: `You scored low on classic disorganization (${Math.round(punctualityAndStructure * 100)}% on missing deadlines, forgetting appointments, or breaking down projects), meaning your external planning systems work well. Your Executive score (${execPct}%) is driven by activation paralysis and choice fog (${Math.round(overwhelmParalysis * 100)}% on task-start overwhelm, too many options, and micro-task backlog).`
+        });
+        strategies.push(`<strong>Use a "Rule of 3" View Filter:</strong> Because you already hit external deadlines but freeze when staring at too many small tasks or options, hide your master backlog and expose at most 3 items at a time.`);
+        strategies.push(`<strong>Protect Personal Commitments Like External Meetings:</strong> Anchor personal goals to calendar blocks—your answers show you reliably keep commitments to others while dropping plans made only for yourself.`);
+      } else if (execPct >= 60) {
+        cards.push({
+          title: "Working-Memory & Task-Initiation Bottleneck",
+          body: `At ${execPct}% Executive load, friction peaks when transitioning between topics, estimating time, or initiating tasks that lack immediate structure.`
+        });
+        strategies.push(`<strong>Shrink the Activation Unit to 2 Minutes:</strong> Bypass task-initiation resistance by defining a mechanical 2-minute starting step rather than the whole deliverable.`);
+      }
+
+      // 3. Emotional Masking & Rejection/Justice Sensitivity
+      const internalFeeling = avgOf([5, 17, 53, 71, 77, 83, 89, 95]);
+      const outwardDrama = avgOf([41, 47]);
+      if (internalFeeling !== null && internalFeeling >= 0.7) {
+        const maskedNote = (outwardDrama !== null && outwardDrama <= 0.35)
+          ? " You also rated low on outwardly showing emotions (#41, #47), indicating you mask and absorb this reactivity internally."
+          : "";
+        cards.push({
+          title: "Rejection Sensitivity, Empathy & Rumination",
+          body: `Your highest-rated emotional items center on sensitivity to criticism (#17), strong fairness/justice drive (#83), crowd/sensory overload (#53), and difficulty letting go of minor annoyances (#89).${maskedNote}`
+        });
+        strategies.push(`<strong>Build Low-Stimulation Decompression Buffers:</strong> High empathy and crowd/noise sensitivity drain executive bandwidth rapidly—schedule 10-minute quiet sensory resets after high-stimulation meetings.`);
+      }
+
+      // 4. Micro-Dopamine Seeking vs Macro-Prudence
+      const microDopamine = avgOf([21, 33, 45, 63, 69, 75]);
+      const macroRisk = avgOf([27, 39, 87, 93]);
+      if (microDopamine !== null && macroRisk !== null && microDopamine >= 0.6 && macroRisk <= 0.25) {
+        cards.push({
+          title: "Dopamine Micro-Habits, Not Reckless Risk-Taking",
+          body: `Your Impulsivity (${traitTotals.Impulsive.pct}%) is highly selective: you strongly disagreed with reckless big decisions or thrill-seeking (${Math.round(macroRisk * 100)}%), but rated high (${Math.round(microDopamine * 100)}%) on fast dopamine loops (doom-scrolling, snacks/habits, impatience waiting for replies, and finishing others' sentences).`
+        });
+        strategies.push(`<strong>Replace Doom-Scrolling Transitions:</strong> When mentally fatigued, your brain seeks quick dopamine via app-switching (#75) or snacks (#33). Put friction on phone scrolling during work transitions.`);
+      }
+
+      // 5. All-or-Nothing Interest Switch (Hyperfocus)
+      if (traitTotals.Hyperfocus.pct >= 50) {
+        cards.push({
+          title: "Interest-Driven Toggle Switch (0% or 100% Focus)",
+          body: `With ${traitTotals.Hyperfocus.pct}% Hyperfocus, your attention is governed by novelty and intrinsic interest (#42, #60, #66) rather than routine importance—leading to rapid mastery on complex problems but boredom drop-off on the final 10% of routine work (#79, #91).`
+        });
+      }
+
+      if (cards.length === 0) {
+        cards.push({
+          title: "Balanced Cognitive Trait Distribution",
+          body: `Your scores across all 6 dimensions fall within a moderate-to-low band, indicating relatively steady attention regulation without extreme single-domain bottlenecks.`
+        });
+      }
+
+      if (strategies.length === 0) {
+        strategies.push(`<strong>Pair Novelty with Routine:</strong> Group repetitive admin tasks into short timed sprints so they don't bleed into deep-focus problem-solving blocks.`);
+        strategies.push(`<strong>Externalize Working Memory:</strong> Keep checklists visible during multi-step workflows to reduce cognitive load.`);
+      }
+
+      return { cards, strategies };
+    }
+
     traitForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const activeQs = getActiveTraitQuestions();
@@ -2176,6 +2336,7 @@
 
       const modeLabel = traitMode === "quick20" ? "Quick 20-Item Profile" : "Full 100-Item Profile";
       const timestamp = new Date().toLocaleString();
+      const insights = generatePersonalizedInsights(traitTotals, activeQs);
 
       const traitCardsHtml = sortedTraits.map(([key, stats]) => {
         const meta = TRAIT_META[key];
@@ -2195,6 +2356,15 @@
           </div>
         `;
       }).join("");
+
+      const insightCardsHtml = insights.cards.map((c) => `
+        <div class="insight-card">
+          <h4>${c.title}</h4>
+          <p>${c.body}</p>
+        </div>
+      `).join("");
+
+      const strategyItemsHtml = insights.strategies.map((s) => `<li>${s}</li>`).join("");
 
       const tableRowsHtml = activeQs.map((q, i) => {
         const val = traitResponses[q.order];
@@ -2239,6 +2409,20 @@
             ${traitCardsHtml}
           </div>
 
+          <div class="insights-section">
+            <h3>Deep-Dive Sub-Pattern Insights</h3>
+            <p class="insights-lead">Automatically synthesized from contrasts between your highest (<em>Strongly Agree</em>) and lowest (<em>Disagree</em>) responses:</p>
+            <div class="insights-grid">
+              ${insightCardsHtml}
+            </div>
+            <div class="insight-card" style="margin-block-top: 1rem;">
+              <h4>Tailored Operating System Adjustments</h4>
+              <ul class="insight-list">
+                ${strategyItemsHtml}
+              </ul>
+            </div>
+          </div>
+
           <div class="summary-table-wrap">
             <table>
               <caption>Statement-by-Statement Breakdown (${activeQs.length} Items)</caption>
@@ -2273,6 +2457,9 @@
           ``,
           `Trait Breakdown:`,
           ...sortedTraits.map(([k, s]) => `- ${TRAIT_META[k].label}: ${s.pct}% (${s.raw}/${s.max} across ${s.count} items)`),
+          ``,
+          `Key Insights:`,
+          ...insights.cards.map((c) => `- ${c.title}: ${c.body}`),
           ``,
           `Responses:`,
           ...activeQs.map((q, idx) => `${idx + 1}. [${TRAIT_META[q.trait].label}] ${TRAIT_OPTIONS[traitResponses[q.order]].label} (${traitResponses[q.order]}/4) - ${q.statement}`)
