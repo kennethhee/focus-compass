@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="botanical">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WHO Adult ADHD Self-Report Scale (ASRS v1.1)</title>
+  <style>
+    :root,
+    :root[data-theme="botanical"] {
+      color-scheme: light;
+      --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-heading: "Georgia", "Iowan Old Style", "Palatino Linotype", serif;
+      --brand-color: #2d6a4f;
+      --brand-hover: #1b4332;
+      --brand-contrast: #ffffff;
+      --bg-page: #f6f4ee;
+      --bg-card: #fffdf9;
+      --bg-subtle: #ebe6dc;
+      --bg-shaded: #e2ece6;
+      --border-color: #8c8577;
+      --border-subtle: #d5cfc2;
+      --text-main: #1f2421;
+      --text-muted: #525954;
+      --accent-inattentive: #1d657a;
+      --accent-hyperactive: #b5542c;
+      --status-positive-bg: #faeae6;
+      --status-positive-border: #c84b31;
+      --status-positive-text: #7d2413;
+      --status-negative-bg: #e6f2eb;
+      --status-negative-border: #2d6a4f;
+      --status-negative-text: #1b4332;
+      --status-warn-bg: #fdf3dc;
+      --status-warn-border: #c4821a;
+      --status-warn-text: #6e4406;
+      --focus-ring: #1b4332;
+      --radius: 12px;
+      --card-shadow: 0 2px 10px rgba(31, 36, 33, 0.05);
+    }
+
+    :root[data-theme="obsidian"] {
+      color-scheme: dark;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --brand-color: #2dd4bf;
+      --brand-hover: #5eead4;
+      --brand-contrast: #042f2e;
+      --bg-page: #090a0f;
+      --bg-card: #12151f;
+      --bg-subtle: #1c2030;
+      --bg-shaded: #112e30;
+      --border-color: #5b647d;
+      --border-subtle: #272c40;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-inattentive: #38bdf8;
+      --accent-hyperactive: #f59e0b;
+      --status-positive-bg: #3b1219;
+      --status-positive-border: #f87171;
+      --status-positive-text: #fecaca;
+      --status-negative-bg: #082f27;
+      --status-negative-border: #34d399;
+      --status-negative-text: #a7f3d0;
+      --status-warn-bg: #382307;
+      --status-warn-border: #fbbf24;
+      --status-warn-text: #fde68a;
+      --focus-ring: #2dd4bf;
+      --radius: 10px;
+      --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+    }
+
+    :root[data-theme="editorial"] {
+      color-scheme: light;
+      --font-body: "Charter", "Iowan Old Style", "Sitka Text", Palatino, Georgia, serif;
+      --font-heading: "Playfair Display", "Didot", "Bodoni MT", Georgia, serif;
+      --brand-color: #9e2a2b;
+      --brand-hover: #721c1d;
+      --brand-contrast: #ffffff;
+      --bg-page: #faf6f0;
+      --bg-card: #ffffff;
+      --bg-subtle: #f0e9df;
+      --bg-shaded: #f8e8e8;
+      --border-color: #4a453e;
+      --border-subtle: #cfc6b8;
+      --text-main: #181614;
+      --text-muted: #575049;
+      --accent-inattentive: #2b5973;
+      --accent-hyperactive: #9e2a2b;
+      --status-positive-bg: #fbe9e9;
+      --status-positive-border: #9e2a2b;
+      --status-positive-text: #691415;
+      --status-negative-bg: #eaf3ec;
+      --status-negative-border: #2d5a3c;
+      --status-negative-text: #1c3d27;
+      --status-warn-bg: #fbf1de;
+      --status-warn-border: #b07219;
+      --status-warn-text: #633d07;
+      --focus-ring: #9e2a2b;
+      --radius: 2px;
+      --card-shadow: 3px 3px 0px rgba(24, 22, 20, 0.12);
+    }
+
+    :root[data-theme="contrast"] {
+      color-scheme: light;
+      --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-heading: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --brand-color: #0038a8;
+      --brand-hover: #00236b;
+      --brand-contrast: #ffffff;
+      --bg-page: #ffffff;
+      --bg-card: #ffffff;
+      --bg-subtle: #e6ecf5;
+      --bg-shaded: #ffd700;
+      --border-color: #000000;
+      --border-subtle: #000000;
+      --text-main: #000000;
+      --text-muted: #1f2937;
+      --accent-inattentive: #0038a8;
+      --accent-hyperactive: #8a0051;
+      --status-positive-bg: #fff0f0;
+      --status-positive-border: #b30000;
+      --status-positive-text: #7a0000;
+      --status-negative-bg: #eefaf0;
+      --status-negative-border: #006622;
+      --status-negative-text: #004416;
+      --status-warn-bg: #fff9db;
+      --status-warn-border: #8c5800;
+      --status-warn-text: #4d3000;
+      --focus-ring: #000000;
+      --radius: 6px;
+      --card-shadow: none;
+    }
+
+    @media (forced-colors: active) {
+      .question-card,
+      .option-label,
+      .btn,
+      .metric-box,
+      .results-card {
+        border: 2px solid CanvasText;
+      }
+      .option-label:has(input:checked),
+      .btn[aria-pressed="true"] {
+        outline: 3px solid Highlight;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.55;
+      accent-color: var(--brand-color);
+      padding-block-end: 4rem;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-heading);
+    }
+
+    .visually-hidden:where(:not(:focus-within, :active)) {
+      position: absolute !important;
+      clip-path: inset(50%) !important;
+      overflow: hidden !important;
+      width: 1px !important;
+      height: 1px !important;
+      margin: -1px !important;
+      padding: 0 !important;
+      border: 0 !important;
+      white-space: nowrap !important;
+    }
+
+    .skip-link {
+      position: fixed;
+      inset-block-start: 0.75rem;
+      inset-inline-start: 0.75rem;
+      background: var(--bg-card);
+      color: var(--brand-color);
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--brand-color);
+      border-radius: 6px;
+      font-weight: 600;
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+    header {
+      background: var(--bg-card);
+      border-block-end: 1px solid var(--border-subtle);
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 100;
+      padding-block: 0.85rem;
+      padding-inline: 1.25rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .header-inner {
+      max-inline-size: 900px;
+      margin-inline: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-subtitle {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .header-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .theme-switcher {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      background: var(--bg-subtle);
+      padding: 0.25rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .theme-btn {
+      appearance: none;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.3rem 0.65rem;
+      min-block-size: 32px;
+      border-radius: calc(var(--radius) - 2px);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s ease;
+    }
+
+    .theme-btn:hover {
+      color: var(--text-main);
+    }
+
+    .theme-btn[aria-pressed="true"] {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border-color: var(--border-color);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    .swatch {
+      display: inline-block;
+      inline-size: 10px;
+      block-size: 10px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+    }
+
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-inline-size: 190px;
+    }
+
+    .progress-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    progress {
+      inline-size: 100%;
+      block-size: 10px;
+      border-radius: 999px;
+    }
+
+    main {
+      max-inline-size: 900px;
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+      padding-block-start: 1.5rem;
+    }
+
+    .intro-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-block-end: 1.5rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .intro-card p {
+      margin-block: 0 0.75rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .intro-card p:last-child {
+      margin-block-end: 0;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-block-end: 1.25rem;
+    }
+
+    .kbd-hint {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    kbd {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 0.1rem 0.35rem;
+      font-size: 0.78rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .section-block {
+      margin-block-end: 2rem;
+    }
+
+    .section-header {
+      margin-block-end: 1rem;
+    }
+
+    .section-header h2 {
+      margin: 0 0 0.25rem;
+      font-size: 1.2rem;
+    }
+
+    .section-header p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .question-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-block-end: 1rem;
+      box-shadow: var(--card-shadow);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .question-card.unanswered-error {
+      border-color: var(--status-positive-border);
+      background-color: var(--status-positive-bg);
+    }
+
+    .question-card.answered {
+      border-inline-start: 5px solid var(--brand-color);
+    }
+
+    fieldset {
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    legend {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-block-end: 0.85rem;
+      padding: 0;
+      inline-size: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .q-num {
+      color: var(--brand-color);
+      font-weight: 700;
+      margin-inline-end: 0.35rem;
+    }
+
+    .domain-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      border: 1px solid currentColor;
+    }
+
+    .domain-inattentive {
+      color: var(--accent-inattentive);
+      background: var(--bg-subtle);
+    }
+
+    .domain-hyperactive {
+      color: var(--accent-hyperactive);
+      background: var(--bg-subtle);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 680px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 0.75rem;
+      min-block-size: 48px;
+      border: 1px solid var(--border-color);
+      border-radius: calc(var(--radius) - 2px);
+      cursor: pointer;
+      font-size: 0.9rem;
+      background: var(--bg-card);
+      transition: background-color 0.12s ease, border-color 0.12s ease;
+      position: relative;
+      user-select: none;
+    }
+
+    @media (pointer: coarse) {
+      .option-label {
+        min-block-size: 52px;
+      }
+    }
+
+    .option-label:hover {
+      border-color: var(--brand-color);
+    }
+
+    /* Subtle clinical threshold indicator (ASRS shaded boxes) */
+    .option-label.clinically-shaded {
+      background-color: var(--bg-subtle);
+    }
+
+    .option-label:has(input:checked) {
+      border: 2px solid var(--brand-color);
+      background-color: var(--bg-shaded);
+      font-weight: 700;
+    }
+
+    .option-label input[type="radio"] {
+      margin: 0;
+      inline-size: 1.1rem;
+      block-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    :where(a:any-link, button, input[type="radio"]):focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    @supports not (accent-color: #2d6a4f) {
+      .option-label input[type="radio"] {
+        position: absolute !important;
+        clip-path: inset(50%) !important;
+        overflow: hidden !important;
+        width: 1px !important;
+        height: 1px !important;
+        margin: -1px !important;
+        padding: 0 !important;
+        border: 0 !important;
+        white-space: nowrap !important;
+      }
+      .option-label {
+        padding-inline-start: 2.25rem;
+      }
+      .option-label input[type="radio"] + span::before {
+        content: "";
+        position: absolute;
+        inset-inline-start: 0.65rem;
+        inset-block-start: 50%;
+        transform: translateY(-50%);
+        width: 1.1rem;
+        height: 1.1rem;
+        border: 2px solid var(--border-color);
+        border-radius: 50%;
+        background: var(--bg-card);
+        box-sizing: border-box;
+      }
+      .option-label input[type="radio"]:focus-visible + span::before {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 2px;
+      }
+      .option-label input[type="radio"]:checked + span::before {
+        border-color: var(--brand-color);
+        background-color: var(--brand-color);
+        box-shadow: inset 0 0 0 3px var(--bg-card);
+      }
+    }
+
+    .error-msg {
+      color: var(--status-positive-text);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-block-start: 0.5rem;
+      display: none;
+    }
+
+    .question-card.unanswered-error .error-msg {
+      display: block;
+    }
+
+    .actions-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-block-start: 1.5rem;
+      padding-block-start: 1rem;
+      border-block-start: 1px solid var(--border-subtle);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-block-size: 48px;
+      padding: 0.65rem 1.25rem;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: var(--font-body);
+      border-radius: calc(var(--radius) - 2px);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--brand-color);
+      color: var(--brand-contrast);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--brand-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-card);
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-subtle);
+    }
+
+    .btn-sm {
+      min-block-size: 36px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    /* Results Panel */
+    #results-region {
+      margin-block-start: 2.5rem;
+    }
+
+    .results-card {
+      background: var(--bg-card);
+      border: 2px solid var(--brand-color);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .results-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-block-end: 1.25rem;
+      padding-block-end: 1rem;
+      border-block-end: 1px solid var(--border-subtle);
+    }
+
+    .results-header h2 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+
+    .timestamp {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .status-banner {
+      padding: 1rem 1.25rem;
+      border-radius: calc(var(--radius) - 2px);
+      border-inline-start: 5px solid;
+      margin-block-end: 1.5rem;
+    }
+
+    .status-banner.positive {
+      background: var(--status-positive-bg);
+      border-color: var(--status-positive-border);
+      color: var(--status-positive-text);
+    }
+
+    .status-banner.negative {
+      background: var(--status-negative-bg);
+      border-color: var(--status-negative-border);
+      color: var(--status-negative-text);
+    }
+
+    .status-banner h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1.1rem;
+    }
+
+    .status-banner p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem;
+      margin-block-end: 1.5rem;
+    }
+
+    .metric-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: calc(var(--radius) - 2px);
+      padding: 1rem;
+    }
+
+    .metric-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-block-end: 0.35rem;
+    }
+
+    .metric-value {
+      font-size: 1.65rem;
+      font-weight: 800;
+      margin-block-end: 0.25rem;
+    }
+
+    .metric-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .bar-track {
+      block-size: 8px;
+      background: var(--border-subtle);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-block-start: 0.5rem;
+    }
+
+    .bar-fill {
+      block-size: 100%;
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    .summary-table-wrap {
+      overflow-x: auto;
+      margin-block-end: 1.5rem;
+    }
+
+    table {
+      inline-size: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    caption {
+      text-align: start;
+      font-weight: 700;
+      margin-block-end: 0.5rem;
+      font-size: 1rem;
+    }
+
+    th, td {
+      padding: 0.6rem 0.75rem;
+      border-block-end: 1px solid var(--border-subtle);
+      text-align: start;
+    }
+
+    th {
+      background: var(--bg-subtle);
+      font-weight: 600;
+    }
+
+    .flag-pill {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .flag-yes {
+      background: var(--status-positive-bg);
+      color: var(--status-positive-text);
+      border: 1px solid var(--status-positive-border);
+    }
+
+    .flag-no {
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .disclaimer-box {
+      background: var(--status-warn-bg);
+      border: 1px solid var(--status-warn-border);
+      color: var(--status-warn-text);
+      padding: 0.85rem 1rem;
+      border-radius: calc(var(--radius) - 2px);
+      font-size: 0.85rem;
+      margin-block-end: 1.25rem;
+    }
+
+    @media print {
+      header, .toolbar, .actions-bar, #asrs-form, .no-print {
+        display: none !important;
+      }
+      body {
+        background: #ffffff;
+        color: #000000;
+        padding: 0;
+      }
+      main {
+        max-inline-size: 100%;
+        padding: 0;
+      }
+      .results-card {
+        border: 1px solid #000000;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-heading" class="skip-link visually-hidden">Skip to assessment</a>
+
+  <header>
+    <div class="header-inner">
+      <div>
+        <h1 class="brand-title" id="main-heading" tabindex="-1">WHO Adult ADHD Self-Report Scale (ASRS-v1.1)</h1>
+        <p class="brand-subtitle">18-Item Symptom Checklist &amp; Clinical Threshold Screener</p>
+      </div>
+      <div class="header-controls">
+        <div class="theme-switcher no-print" role="group" aria-label="Color Theme">
+          <button type="button" class="theme-btn" data-theme-val="botanical" aria-pressed="true">
+            <span class="swatch" style="background: #2d6a4f;" aria-hidden="true"></span>Botanical
+          </button>
+          <button type="button" class="theme-btn" data-theme-val="obsidian" aria-pressed="false">
+            <span class="swatch" style="background: #2dd4bf;" aria-hidden="true"></span>Obsidian
+          </button>
+          <button type="button" class="theme-btn" data-theme-val="editorial" aria-pressed="false">
+            <span class="swatch" style="background: #9e2a2b;" aria-hidden="true"></span>Editorial
+          </button>
+          <button type="button" class="theme-btn" data-theme-val="contrast" aria-pressed="false">
+            <span class="swatch" style="background: #ffd700;" aria-hidden="true"></span>High-Contrast
+          </button>
+        </div>
+        <div class="progress-wrap">
+          <label for="completion-progress" class="progress-label" id="progress-text">0 / 18 answered</label>
+          <progress id="completion-progress" max="18" value="0">0%</progress>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro-card">
+      <p><strong>Instructions:</strong> Answer the questions below by rating how you have felt and conducted yourself <strong>over the past 6 months</strong>. Shaded response boxes indicate the World Health Organization (WHO) clinical symptom threshold for each item.</p>
+      <p><strong>Clinical Scoring Method:</strong> Each item has a specific clinical threshold (either <em>Sometimes+</em> at score &ge; 2, or <em>Often+</em> at score &ge; 3). Scoring <strong>4 or more threshold items in Part A</strong> indicates symptoms highly consistent with ADHD in adults.</p>
+    </div>
+
+    <div class="toolbar no-print">
+      <span class="kbd-hint">Tip: Use <kbd>Tab</kbd> and arrow keys, or press <kbd>1</kbd>–<kbd>5</kbd> while focused on a question.</span>
+      <div>
+        <button type="button" class="btn btn-secondary btn-sm" id="reset-btn">Clear Responses</button>
+      </div>
+    </div>
+
+    <div id="live-announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
+    <form id="asrs-form" action="#results-region" method="POST" novalidate>
+      <div class="section-block">
+        <div class="section-header">
+          <h2>Part A: Primary Screener (Questions 1–6)</h2>
+          <p>These 6 questions were found to be the most predictive of symptoms consistent with ADHD.</p>
+        </div>
+        <div id="part-a-container"></div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-header">
+          <h2>Part B: Additional Symptom Profile (Questions 7–18)</h2>
+          <p>These 12 questions provide additional cues on symptom frequency across Inattentive and Hyperactive/Impulsive domains.</p>
+        </div>
+        <div id="part-b-container"></div>
+      </div>
+
+      <div class="actions-bar">
+        <span id="validation-summary" role="alert" style="color: var(--status-positive-text); font-weight: 600;"></span>
+        <button type="submit" class="btn btn-primary" id="submit-btn">Calculate Clinical Score</button>
+      </div>
+    </form>
+
+    <div id="results-region" hidden></div>
+  </main>
+
+  <script>
+    const OPTIONS = [
+      { value: 0, label: "Never" },
+      { value: 1, label: "Rarely" },
+      { value: 2, label: "Sometimes" },
+      { value: 3, label: "Often" },
+      { value: 4, label: "Very Often" }
+    ];
+
+    const QUESTIONS = [
+      { id: 1, part: "A", domain: "Inattentive", threshold: 2, text: "How often do you have trouble wrapping up the final details of a project, once the challenging parts have been done?" },
+      { id: 2, part: "A", domain: "Inattentive", threshold: 2, text: "How often do you have difficulty getting things in order when you have to do a task that requires organization?" },
+      { id: 3, part: "A", domain: "Inattentive", threshold: 2, text: "How often do you have problems remembering appointments or obligations?" },
+      { id: 4, part: "A", domain: "Inattentive", threshold: 3, text: "When you have a task that requires a lot of thought, how often do you avoid or delay getting started?" },
+      { id: 5, part: "A", domain: "Hyperactive/Impulsive", threshold: 3, text: "How often do you fidget or squirm with your hands or feet when you have to sit down for a long time?" },
+      { id: 6, part: "A", domain: "Hyperactive/Impulsive", threshold: 3, text: "How often do you feel overly active and compelled to do things, like you were driven by a motor?" },
+      { id: 7, part: "B", domain: "Inattentive", threshold: 3, text: "How often do you make careless mistakes when you have to work on a boring or difficult project?" },
+      { id: 8, part: "B", domain: "Inattentive", threshold: 3, text: "How often do you have difficulty keeping your attention when you are doing boring or repetitive work?" },
+      { id: 9, part: "B", domain: "Inattentive", threshold: 2, text: "How often do you have difficulty concentrating on what people say to you, even when they are speaking to you directly?" },
+      { id: 10, part: "B", domain: "Inattentive", threshold: 3, text: "How often do you misplace or have difficulty finding things at home or at work?" },
+      { id: 11, part: "B", domain: "Inattentive", threshold: 3, text: "How often are you distracted by activity or noise around you?" },
+      { id: 12, part: "B", domain: "Hyperactive/Impulsive", threshold: 2, text: "How often do you leave your seat in meetings or other situations in which you are expected to remain seated?" },
+      { id: 13, part: "B", domain: "Hyperactive/Impulsive", threshold: 3, text: "How often do you feel restless or fidgety?" },
+      { id: 14, part: "B", domain: "Hyperactive/Impulsive", threshold: 3, text: "How often do you have difficulty unwinding and relaxing when you have time to yourself?" },
+      { id: 15, part: "B", domain: "Hyperactive/Impulsive", threshold: 3, text: "How often do you find yourself talking too much when you are in social situations?" },
+      { id: 16, part: "B", domain: "Hyperactive/Impulsive", threshold: 2, text: "When you're in a conversation, how often do you find yourself finishing the sentences of the people you are talking to, before they can finish them themselves?" },
+      { id: 17, part: "B", domain: "Hyperactive/Impulsive", threshold: 3, text: "How often do you have difficulty waiting your turn in situations when turn taking is required?" },
+      { id: 18, part: "B", domain: "Hyperactive/Impulsive", threshold: 2, text: "How often do you interrupt others when they are busy?" }
+    ];
+
+    const STORAGE_KEY = "asrs_v1_1_responses";
+    const THEME_KEY = "adhd_assessment_theme_v1";
+    const partAContainer = document.getElementById("part-a-container");
+    const partBContainer = document.getElementById("part-b-container");
+    const form = document.getElementById("asrs-form");
+    const progressEl = document.getElementById("completion-progress");
+    const progressText = document.getElementById("progress-text");
+    const validationSummary = document.getElementById("validation-summary");
+    const resultsRegion = document.getElementById("results-region");
+    const resetBtn = document.getElementById("reset-btn");
+    const liveAnnouncer = document.getElementById("live-announcer");
+    const themeBtns = document.querySelectorAll(".theme-btn");
+
+    function applyTheme(themeName, announce = false) {
+      document.documentElement.setAttribute("data-theme", themeName);
+      themeBtns.forEach((btn) => {
+        btn.setAttribute("aria-pressed", String(btn.dataset.themeVal === themeName));
+      });
+      try {
+        localStorage.setItem(THEME_KEY, themeName);
+      } catch (e) {}
+      if (announce) {
+        liveAnnouncer.textContent = `Theme changed to ${themeName}.`;
+      }
+    }
+
+    themeBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        applyTheme(btn.dataset.themeVal, true);
+      });
+    });
+
+    function initTheme() {
+      try {
+        const savedTheme = localStorage.getItem(THEME_KEY);
+        if (savedTheme && ["botanical", "obsidian", "editorial", "contrast"].includes(savedTheme)) {
+          applyTheme(savedTheme, false);
+        }
+      } catch (e) {}
+    }
+
+    function renderQuestions() {
+      QUESTIONS.forEach((q) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.id = `card-q${q.id}`;
+        card.dataset.qid = q.id;
+
+        const domainClass = q.domain === "Inattentive" ? "domain-inattentive" : "domain-hyperactive";
+        const errId = `err-q${q.id}`;
+
+        const optionsHtml = OPTIONS.map((opt) => {
+          const inputId = `q${q.id}-opt${opt.value}`;
+          const isShaded = opt.value >= q.threshold;
+          return `
+            <label for="${inputId}" class="option-label ${isShaded ? "clinically-shaded" : ""}">
+              <input
+                type="radio"
+                id="${inputId}"
+                name="q${q.id}"
+                value="${opt.value}"
+                required
+                aria-describedby="${errId}"
+              >
+              <span>${opt.label}</span>
+            </label>
+          `;
+        }).join("");
+
+        card.innerHTML = `
+          <fieldset>
+            <legend>
+              <span><span class="q-num">${q.id}.</span> ${q.text}</span>
+              <span class="domain-badge ${domainClass}">${q.domain}</span>
+            </legend>
+            <div class="options-grid">
+              ${optionsHtml}
+            </div>
+            <div id="${errId}" class="error-msg">⚠ Please select a frequency for Question ${q.id}.</div>
+          </fieldset>
+        `;
+
+        if (q.part === "A") {
+          partAContainer.appendChild(card);
+        } else {
+          partBContainer.appendChild(card);
+        }
+      });
+    }
+
+    function getResponses() {
+      const data = new FormData(form);
+      const responses = {};
+      QUESTIONS.forEach((q) => {
+        const val = data.get(`q${q.id}`);
+        if (val !== null) {
+          responses[q.id] = Number(val);
+        }
+      });
+      return responses;
+    }
+
+    function updateProgressAndSave() {
+      const responses = getResponses();
+      const count = Object.keys(responses).length;
+      progressEl.value = count;
+      progressEl.textContent = `${Math.round((count / 18) * 100)}%`;
+      progressText.textContent = `${count} / 18 answered`;
+
+      QUESTIONS.forEach((q) => {
+        const card = document.getElementById(`card-q${q.id}`);
+        if (responses[q.id] !== undefined) {
+          card.classList.add("answered");
+          card.classList.remove("unanswered-error");
+        } else {
+          card.classList.remove("answered");
+        }
+      });
+
+      if (count === 18) {
+        validationSummary.textContent = "";
+      }
+
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+      } catch (err) {}
+    }
+
+    function restoreSavedResponses() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const saved = JSON.parse(raw);
+        Object.entries(saved).forEach(([qid, val]) => {
+          const radio = document.getElementById(`q${qid}-opt${val}`);
+          if (radio) radio.checked = true;
+        });
+        updateProgressAndSave();
+      } catch (err) {}
+    }
+
+    function calculateResults(responses) {
+      let partAShaded = 0;
+      let partARaw = 0;
+      let partBShaded = 0;
+      let partBRaw = 0;
+
+      let inattentiveShaded = 0;
+      let inattentiveRaw = 0;
+      let hyperactiveShaded = 0;
+      let hyperactiveRaw = 0;
+
+      const itemBreakdowns = QUESTIONS.map((q) => {
+        const val = responses[q.id];
+        const isShaded = val >= q.threshold;
+        if (q.part === "A") {
+          partARaw += val;
+          if (isShaded) partAShaded++;
+        } else {
+          partBRaw += val;
+          if (isShaded) partBShaded++;
+        }
+
+        if (q.domain === "Inattentive") {
+          inattentiveRaw += val;
+          if (isShaded) inattentiveShaded++;
+        } else {
+          hyperactiveRaw += val;
+          if (isShaded) hyperactiveShaded++;
+        }
+
+        return {
+          ...q,
+          score: val,
+          label: OPTIONS[val].label,
+          isShaded
+        };
+      });
+
+      const totalShaded = partAShaded + partBShaded;
+      const totalRaw = partARaw + partBRaw;
+      const isPositiveScreen = partAShaded >= 4;
+
+      let partASeverity = "Low (0–9)";
+      if (partARaw >= 18) partASeverity = "Very High (18–24)";
+      else if (partARaw >= 14) partASeverity = "High / Clinical Range (14–17)";
+      else if (partARaw >= 10) partASeverity = "Mild to Moderate (10–13)";
+
+      return {
+        partAShaded,
+        partARaw,
+        partASeverity,
+        partBShaded,
+        partBRaw,
+        totalShaded,
+        totalRaw,
+        inattentiveShaded,
+        inattentiveRaw,
+        hyperactiveShaded,
+        hyperactiveRaw,
+        isPositiveScreen,
+        itemBreakdowns,
+        timestamp: new Date().toLocaleString()
+      };
+    }
+
+    function renderResults(res) {
+      const statusClass = res.isPositiveScreen ? "positive" : "negative";
+      const statusHeading = res.isPositiveScreen
+        ? "Positive Screen: Symptoms Highly Consistent with Adult ADHD"
+        : "Negative Screen: Symptoms Below Primary Clinical Cutoff";
+      const statusDesc = res.isPositiveScreen
+        ? `You scored inside the clinical threshold on ${res.partAShaded} out of 6 items in Part A (cutoff is 4 or more). A comprehensive diagnostic evaluation with a qualified clinician is recommended.`
+        : `You scored inside the clinical threshold on ${res.partAShaded} out of 6 items in Part A (cutoff is 4 or more). While primary screening criteria were not met, review Part B and domain breakdowns if specific symptoms cause impairment.`;
+
+      const rowsHtml = res.itemBreakdowns.map((item) => `
+        <tr>
+          <th scope="row">Q${item.id} (Part ${item.part})</th>
+          <td>${item.text}</td>
+          <td>${item.domain}</td>
+          <td><strong>${item.label}</strong> (${item.score})</td>
+          <td>
+            <span class="flag-pill ${item.isShaded ? "flag-yes" : "flag-no"}">
+              ${item.isShaded ? "▲ Above Threshold" : "✓ Below Threshold"}
+            </span>
+          </td>
+        </tr>
+      `).join("");
+
+      resultsRegion.innerHTML = `
+        <div class="results-card" id="results-card" tabindex="-1">
+          <div class="results-header">
+            <div>
+              <h2>ASRS-v1.1 Clinical Assessment Summary</h2>
+              <span class="timestamp">Completed: ${res.timestamp}</span>
+            </div>
+            <div class="no-print" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="btn btn-secondary btn-sm" id="copy-txt-btn">Copy Plain Text</button>
+              <button type="button" class="btn btn-primary btn-sm" id="print-btn">Print / Save PDF</button>
+            </div>
+          </div>
+
+          <div class="status-banner ${statusClass}">
+            <h3>${statusHeading}</h3>
+            <p>${statusDesc}</p>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric-box">
+              <div class="metric-title">Part A Screener (Threshold)</div>
+              <div class="metric-value">${res.partAShaded} / 6</div>
+              <div class="metric-sub">Raw Score: ${res.partARaw} / 24 &bull; ${res.partASeverity}</div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width: ${(res.partAShaded / 6) * 100}%; background: var(--brand-color);"></div>
+              </div>
+            </div>
+
+            <div class="metric-box">
+              <div class="metric-title">Total Checklist (All 18)</div>
+              <div class="metric-value">${res.totalShaded} / 18</div>
+              <div class="metric-sub">Total Raw Score: ${res.totalRaw} / 72 (Part B: ${res.partBShaded}/12)</div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width: ${(res.totalShaded / 18) * 100}%; background: var(--brand-color);"></div>
+              </div>
+            </div>
+
+            <div class="metric-box">
+              <div class="metric-title">Inattentive Domain</div>
+              <div class="metric-value">${res.inattentiveShaded} / 9</div>
+              <div class="metric-sub">Raw Score: ${res.inattentiveRaw} / 36 (Q1–4, Q7–11)</div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width: ${(res.inattentiveShaded / 9) * 100}%; background: var(--accent-inattentive);"></div>
+              </div>
+            </div>
+
+            <div class="metric-box">
+              <div class="metric-title">Hyperactive / Impulsive</div>
+              <div class="metric-value">${res.hyperactiveShaded} / 9</div>
+              <div class="metric-sub">Raw Score: ${res.hyperactiveRaw} / 36 (Q5–6, Q12–18)</div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width: ${(res.hyperactiveShaded / 9) * 100}%; background: var(--accent-hyperactive);"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="disclaimer-box">
+            <strong>Clinical Disclaimer:</strong> The WHO Adult ADHD Self-Report Scale (ASRS-v1.1) is a validated screening instrument, not a standalone medical diagnosis. An ADHD diagnosis requires a clinical assessment evaluating developmental history, cross-situational functional impairment, and differential conditions.
+          </div>
+
+          <div class="summary-table-wrap">
+            <table>
+              <caption>Item-by-Item Response Breakdown</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Symptom Prompt</th>
+                  <th scope="col">Domain</th>
+                  <th scope="col">Response</th>
+                  <th scope="col">Clinical Threshold</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rowsHtml}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      resultsRegion.hidden = false;
+      document.title = `Results (${res.partAShaded}/6 Part A) | WHO ASRS-v1.1 ADHD Screener`;
+
+      const resultsCard = document.getElementById("results-card");
+      resultsCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      resultsCard.focus({ preventScroll: true });
+
+      document.getElementById("print-btn").addEventListener("click", () => {
+        window.print();
+      });
+
+      document.getElementById("copy-txt-btn").addEventListener("click", (e) => {
+        const lines = [
+          `WHO Adult ADHD Self-Report Scale (ASRS-v1.1) Summary`,
+          `Completed: ${res.timestamp}`,
+          ``,
+          `- Screening Result: ${res.isPositiveScreen ? "Positive Screen (>= 4 in Part A)" : "Negative Screen (< 4 in Part A)"}`,
+          `- Part A Screener: ${res.partAShaded}/6 threshold items (${res.partARaw}/24 raw, ${res.partASeverity})`,
+          `- Part B Checklist: ${res.partBShaded}/12 threshold items (${res.partBRaw}/48 raw)`,
+          `- Total Score: ${res.totalShaded}/18 threshold items (${res.totalRaw}/72 raw)`,
+          `- Inattentive Domain: ${res.inattentiveShaded}/9 threshold items (${res.inattentiveRaw}/36 raw)`,
+          `- Hyperactive/Impulsive Domain: ${res.hyperactiveShaded}/9 threshold items (${res.hyperactiveRaw}/36 raw)`,
+          ``,
+          `Item Breakdown:`,
+          ...res.itemBreakdowns.map((i) => `${i.id}. [${i.isShaded ? "THRESHOLD" : "ok"}] ${i.label} (${i.score}) - ${i.text}`)
+        ];
+        navigator.clipboard.writeText(lines.join("\n")).then(() => {
+          const btn = e.currentTarget;
+          btn.textContent = "Copied!";
+          liveAnnouncer.textContent = "Summary copied to clipboard.";
+          setTimeout(() => { btn.textContent = "Copy Plain Text"; }, 2000);
+        });
+      });
+    }
+
+    form.addEventListener("input", () => {
+      updateProgressAndSave();
+    });
+
+    form.addEventListener("keydown", (e) => {
+      if (["1", "2", "3", "4", "5"].includes(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        const card = e.target.closest(".question-card");
+        if (!card) return;
+        const qid = Number(card.dataset.qid);
+        const val = Number(e.key) - 1;
+        const radio = document.getElementById(`q${qid}-opt${val}`);
+        if (radio) {
+          e.preventDefault();
+          radio.checked = true;
+          radio.focus();
+          updateProgressAndSave();
+        }
+      }
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const responses = getResponses();
+      const missingIds = QUESTIONS.filter((q) => responses[q.id] === undefined).map((q) => q.id);
+
+      if (missingIds.length > 0) {
+        missingIds.forEach((id) => {
+          document.getElementById(`card-q${id}`).classList.add("unanswered-error");
+        });
+        validationSummary.textContent = `⚠ Please complete all 18 questions (${missingIds.length} remaining, starting at Question ${missingIds[0]}).`;
+        const firstMissingInput = document.getElementById(`q${missingIds[0]}-opt0`);
+        if (firstMissingInput) {
+          firstMissingInput.focus();
+          document.getElementById(`card-q${missingIds[0]}`).scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        return;
+      }
+
+      validationSummary.textContent = "";
+      const results = calculateResults(responses);
+      renderResults(results);
+    });
+
+    resetBtn.addEventListener("click", () => {
+      if (!confirm("Clear all saved responses and reset the assessment?")) return;
+      form.reset();
+      try { localStorage.removeItem(STORAGE_KEY); } catch (err) {}
+      QUESTIONS.forEach((q) => {
+        const card = document.getElementById(`card-q${q.id}`);
+        card.classList.remove("answered", "unanswered-error");
+      });
+      validationSummary.textContent = "";
+      resultsRegion.hidden = true;
+      resultsRegion.innerHTML = "";
+      document.title = "WHO Adult ADHD Self-Report Scale (ASRS v1.1)";
+      updateProgressAndSave();
+      liveAnnouncer.textContent = "All responses cleared.";
+    });
+
+    initTheme();
+    renderQuestions();
+    restoreSavedResponses();
+  </script>
+</body>
+</html>

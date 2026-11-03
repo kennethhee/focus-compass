@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="botanical">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestLibrary 6-Dimension ADHD Trait Profile (Paywall-Free)</title>
+  <style>
+    :root,
+    :root[data-theme="botanical"] {
+      color-scheme: light;
+      --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-heading: "Georgia", "Iowan Old Style", "Palatino Linotype", serif;
+      --brand-color: #2d6a4f;
+      --brand-hover: #1b4332;
+      --brand-contrast: #ffffff;
+      --bg-page: #f6f4ee;
+      --bg-card: #fffdf9;
+      --bg-subtle: #ebe6dc;
+      --bg-selected: #e2ece6;
+      --border-color: #8c8577;
+      --border-subtle: #d5cfc2;
+      --text-main: #1f2421;
+      --text-muted: #525954;
+      --focus-ring: #1b4332;
+      --error-bg: #faeae6;
+      --error-border: #c84b31;
+      --error-text: #7d2413;
+      --radius: 12px;
+      --card-shadow: 0 2px 10px rgba(31, 36, 33, 0.05);
+
+      --c-inattentive: #1d657a;
+      --c-hyperactive: #b5542c;
+      --c-impulsive: #a8334c;
+      --c-executive: #5e4b8b;
+      --c-emotional: #9e3d64;
+      --c-hyperfocus: #2d6a4f;
+    }
+
+    :root[data-theme="obsidian"] {
+      color-scheme: dark;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --brand-color: #2dd4bf;
+      --brand-hover: #5eead4;
+      --brand-contrast: #042f2e;
+      --bg-page: #090a0f;
+      --bg-card: #12151f;
+      --bg-subtle: #1c2030;
+      --bg-selected: #112e30;
+      --border-color: #5b647d;
+      --border-subtle: #272c40;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --focus-ring: #2dd4bf;
+      --error-bg: #3b1219;
+      --error-border: #f87171;
+      --error-text: #fecaca;
+      --radius: 10px;
+      --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+
+      --c-inattentive: #38bdf8;
+      --c-hyperactive: #fb923c;
+      --c-impulsive: #fb7185;
+      --c-executive: #a78bfa;
+      --c-emotional: #f472b6;
+      --c-hyperfocus: #34d399;
+    }
+
+    :root[data-theme="editorial"] {
+      color-scheme: light;
+      --font-body: "Charter", "Iowan Old Style", "Sitka Text", Palatino, Georgia, serif;
+      --font-heading: "Playfair Display", "Didot", "Bodoni MT", Georgia, serif;
+      --brand-color: #9e2a2b;
+      --brand-hover: #721c1d;
+      --brand-contrast: #ffffff;
+      --bg-page: #faf6f0;
+      --bg-card: #ffffff;
+      --bg-subtle: #f0e9df;
+      --bg-selected: #f8e8e8;
+      --border-color: #4a453e;
+      --border-subtle: #cfc6b8;
+      --text-main: #181614;
+      --text-muted: #575049;
+      --focus-ring: #9e2a2b;
+      --error-bg: #fbe9e9;
+      --error-border: #9e2a2b;
+      --error-text: #691415;
+      --radius: 2px;
+      --card-shadow: 3px 3px 0px rgba(24, 22, 20, 0.12);
+
+      --c-inattentive: #2b5973;
+      --c-hyperactive: #b3471b;
+      --c-impulsive: #9e2a2b;
+      --c-executive: #523a78;
+      --c-emotional: #8a2c52;
+      --c-hyperfocus: #2d5a3c;
+    }
+
+    :root[data-theme="contrast"] {
+      color-scheme: light;
+      --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-heading: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --brand-color: #0038a8;
+      --brand-hover: #00236b;
+      --brand-contrast: #ffffff;
+      --bg-page: #ffffff;
+      --bg-card: #ffffff;
+      --bg-subtle: #e6ecf5;
+      --bg-selected: #ffd700;
+      --border-color: #000000;
+      --border-subtle: #000000;
+      --text-main: #000000;
+      --text-muted: #1f2937;
+      --focus-ring: #000000;
+      --error-bg: #fff0f0;
+      --error-border: #b30000;
+      --error-text: #7a0000;
+      --radius: 6px;
+      --card-shadow: none;
+
+      --c-inattentive: #0038a8;
+      --c-hyperactive: #8a3300;
+      --c-impulsive: #990026;
+      --c-executive: #4b0082;
+      --c-emotional: #8a0051;
+      --c-hyperfocus: #005c29;
+    }
+
+    @media (forced-colors: active) {
+      .question-card,
+      .option-label,
+      .btn,
+      .trait-card,
+      .results-card {
+        border: 2px solid CanvasText;
+      }
+      .option-label:has(input:checked),
+      .btn[aria-pressed="true"] {
+        outline: 3px solid Highlight;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.55;
+      accent-color: var(--brand-color);
+      padding-block-end: 4rem;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-heading);
+    }
+
+    .visually-hidden:where(:not(:focus-within, :active)) {
+      position: absolute !important;
+      clip-path: inset(50%) !important;
+      overflow: hidden !important;
+      width: 1px !important;
+      height: 1px !important;
+      margin: -1px !important;
+      padding: 0 !important;
+      border: 0 !important;
+      white-space: nowrap !important;
+    }
+
+    .skip-link {
+      position: fixed;
+      inset-block-start: 0.75rem;
+      inset-inline-start: 0.75rem;
+      background: var(--bg-card);
+      color: var(--brand-color);
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--brand-color);
+      border-radius: 6px;
+      font-weight: 600;
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+    header {
+      background: var(--bg-card);
+      border-block-end: 1px solid var(--border-subtle);
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 100;
+      padding-block: 0.85rem;
+      padding-inline: 1.25rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .header-inner {
+      max-inline-size: 920px;
+      margin-inline: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-subtitle {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .header-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .theme-switcher {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      background: var(--bg-subtle);
+      padding: 0.25rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .theme-btn {
+      appearance: none;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.3rem 0.65rem;
+      min-block-size: 32px;
+      border-radius: calc(var(--radius) - 2px);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s ease;
+    }
+
+    .theme-btn:hover {
+      color: var(--text-main);
+    }
+
+    .theme-btn[aria-pressed="true"] {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border-color: var(--border-color);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    .swatch {
+      display: inline-block;
+      inline-size: 10px;
+      block-size: 10px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+    }
+
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-inline-size: 190px;
+    }
+
+    .progress-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    progress {
+      inline-size: 100%;
+      block-size: 10px;
+      border-radius: 999px;
+    }
+
+    main {
+      max-inline-size: 920px;
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+      padding-block-start: 1.5rem;
+    }
+
+    .intro-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-block-end: 1.25rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .intro-card p {
+      margin-block: 0 0.65rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .intro-card p:last-child {
+      margin-block-end: 0;
+    }
+
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 0.85rem 1.25rem;
+      margin-block-end: 1.25rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .mode-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .mode-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-inline-end: 0.25rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-block-size: 44px;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      font-family: var(--font-body);
+      border-radius: calc(var(--radius) - 2px);
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-main);
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn:hover {
+      background: var(--bg-subtle);
+    }
+
+    .btn[aria-pressed="true"] {
+      background: var(--brand-color);
+      border-color: var(--brand-color);
+      color: var(--brand-contrast);
+    }
+
+    .btn-primary {
+      background: var(--brand-color);
+      border-color: var(--brand-color);
+      color: var(--brand-contrast);
+      min-block-size: 48px;
+      padding: 0.65rem 1.35rem;
+      font-size: 1rem;
+    }
+
+    .btn-primary:hover {
+      background: var(--brand-hover);
+      border-color: var(--brand-hover);
+    }
+
+    .btn-sm {
+      min-block-size: 36px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.82rem;
+    }
+
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-block-end: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    kbd {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 0.1rem 0.35rem;
+      font-size: 0.78rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .question-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-block-end: 1rem;
+      box-shadow: var(--card-shadow);
+      transition: border-color 0.15s ease;
+    }
+
+    .question-card.answered {
+      border-inline-start: 5px solid var(--brand-color);
+    }
+
+    .question-card.unanswered-error {
+      border-color: var(--error-border);
+      background-color: var(--error-bg);
+    }
+
+    fieldset {
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    legend {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-block-end: 0.85rem;
+      padding: 0;
+      inline-size: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .q-num {
+      color: var(--brand-color);
+      font-weight: 700;
+      margin-inline-end: 0.35rem;
+    }
+
+    .trait-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      border: 1px solid currentColor;
+      background: var(--bg-subtle);
+    }
+
+    .trait-Inattentive { color: var(--c-inattentive); }
+    .trait-Hyperactive { color: var(--c-hyperactive); }
+    .trait-Impulsive   { color: var(--c-impulsive); }
+    .trait-Executive   { color: var(--c-executive); }
+    .trait-Emotional   { color: var(--c-emotional); }
+    .trait-Hyperfocus  { color: var(--c-hyperfocus); }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 680px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 0.75rem;
+      min-block-size: 48px;
+      border: 1px solid var(--border-color);
+      border-radius: calc(var(--radius) - 2px);
+      cursor: pointer;
+      font-size: 0.88rem;
+      background: var(--bg-card);
+      transition: background-color 0.12s ease, border-color 0.12s ease;
+      position: relative;
+      user-select: none;
+    }
+
+    @media (pointer: coarse) {
+      .option-label {
+        min-block-size: 52px;
+      }
+    }
+
+    .option-label:hover {
+      border-color: var(--brand-color);
+    }
+
+    .option-label:has(input:checked) {
+      border: 2px solid var(--brand-color);
+      background-color: var(--bg-selected);
+      font-weight: 700;
+    }
+
+    .option-label input[type="radio"] {
+      margin: 0;
+      inline-size: 1.1rem;
+      block-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    :where(a:any-link, button, input[type="radio"]):focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    @supports not (accent-color: #2d6a4f) {
+      .option-label input[type="radio"] {
+        position: absolute !important;
+        clip-path: inset(50%) !important;
+        overflow: hidden !important;
+        width: 1px !important;
+        height: 1px !important;
+        margin: -1px !important;
+        padding: 0 !important;
+        border: 0 !important;
+        white-space: nowrap !important;
+      }
+      .option-label {
+        padding-inline-start: 2.25rem;
+      }
+      .option-label input[type="radio"] + span::before {
+        content: "";
+        position: absolute;
+        inset-inline-start: 0.65rem;
+        inset-block-start: 50%;
+        transform: translateY(-50%);
+        width: 1.1rem;
+        height: 1.1rem;
+        border: 2px solid var(--border-color);
+        border-radius: 50%;
+        background: var(--bg-card);
+        box-sizing: border-box;
+      }
+      .option-label input[type="radio"]:focus-visible + span::before {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 2px;
+      }
+      .option-label input[type="radio"]:checked + span::before {
+        border-color: var(--brand-color);
+        background-color: var(--brand-color);
+        box-shadow: inset 0 0 0 3px var(--bg-card);
+      }
+    }
+
+    .error-msg {
+      color: var(--error-text);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-block-start: 0.5rem;
+      display: none;
+    }
+
+    .question-card.unanswered-error .error-msg {
+      display: block;
+    }
+
+    .nav-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-block-start: 1.5rem;
+      padding-block-start: 1rem;
+      border-block-start: 1px solid var(--border-subtle);
+    }
+
+    /* Results Card */
+    #results-region {
+      margin-block-start: 2.5rem;
+    }
+
+    .results-card {
+      background: var(--bg-card);
+      border: 2px solid var(--brand-color);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .results-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-block-end: 1.25rem;
+      padding-block-end: 1rem;
+      border-block-end: 1px solid var(--border-subtle);
+    }
+
+    .results-header h2 {
+      margin: 0 0 0.25rem;
+      font-size: 1.35rem;
+    }
+
+    .profile-hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5rem;
+      align-items: center;
+      margin-block-end: 1.75rem;
+    }
+
+    @media (max-width: 760px) {
+      .profile-hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .archetype-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+    }
+
+    .archetype-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--brand-color);
+      margin-block-end: 0.35rem;
+    }
+
+    .archetype-title {
+      margin: 0 0 0.5rem;
+      font-size: 1.4rem;
+    }
+
+    .archetype-desc {
+      margin: 0 0 1rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .radar-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+
+    .traits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-block-end: 1.75rem;
+    }
+
+    .trait-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: calc(var(--radius) - 2px);
+      padding: 1rem 1.15rem;
+    }
+
+    .trait-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-block-end: 0.35rem;
+    }
+
+    .trait-card-title {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .trait-card-pct {
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .bar-track {
+      block-size: 8px;
+      background: var(--border-subtle);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-block-end: 0.5rem;
+    }
+
+    .bar-fill {
+      block-size: 100%;
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    .trait-card-desc {
+      margin: 0.5rem 0 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .summary-table-wrap {
+      overflow-x: auto;
+      margin-block-start: 1.25rem;
+    }
+
+    table {
+      inline-size: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    caption {
+      text-align: start;
+      font-weight: 700;
+      margin-block-end: 0.5rem;
+      font-size: 1rem;
+    }
+
+    th, td {
+      padding: 0.6rem 0.75rem;
+      border-block-end: 1px solid var(--border-subtle);
+      text-align: start;
+    }
+
+    th {
+      background: var(--bg-subtle);
+      font-weight: 600;
+    }
+
+    @media print {
+      header, .controls-bar, .step-indicator, .nav-bar, #quiz-form, .no-print {
+        display: none !important;
+      }
+      body {
+        background: #ffffff;
+        color: #000000;
+        padding: 0;
+      }
+      main {
+        max-inline-size: 100%;
+        padding: 0;
+      }
+      .results-card {
+        border: 1px solid #000000;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-heading" class="skip-link visually-hidden">Skip to assessment</a>
+
+  <header>
+    <div class="header-inner">
+      <div>
+        <h1 class="brand-title" id="main-heading" tabindex="-1">TestLibrary 6-Dimension ADHD Trait Test</h1>
+        <p class="brand-subtitle">Extracted 100-Question Bank &amp; Instant Trait Report (No Paywall)</p>
+      </div>
+      <div class="header-controls">
+        <div class="theme-switcher no-print" role="group" aria-label="Color Theme">
+          <button type="button" class="theme-btn" data-theme-val="botanical" aria-pressed="true">
+            <span class="swatch" style="background: #2d6a4f;" aria-hidden="true"></span>Botanical
+          </button>
+          <button type="button" class="theme-btn" data-theme-val="obsidian" aria-pressed="false">
+            <span class="swatch" style="background: #2dd4bf;" aria-hidden="true"></span>Obsidian
+          </button>
+          <button type="button" class="theme-btn" data-theme-val="editorial" aria-pressed="false">
+            <span class="swatch" style="background: #9e2a2b;" aria-hidden="true"></span>Editorial
+          </button>
+          <button type="button" class="theme-btn" data-theme-val="contrast" aria-pressed="false">
+            <span class="swatch" style="background: #ffd700;" aria-hidden="true"></span>High-Contrast
+          </button>
+        </div>
+        <div class="progress-wrap">
+          <label for="completion-progress" class="progress-label" id="progress-text">0 / 20 answered</label>
+          <progress id="completion-progress" max="20" value="0">0%</progress>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro-card">
+      <p><strong>How this compares to the WHO ASRS v1.1:</strong> TestLibrary's online quiz is a commercial self-discovery personality profile (not a WHO/DSM-5 diagnostic screener) that normally gates results behind an email &amp; subscription paywall. It measures <strong>6 trait dimensions</strong> on a 5-point Agreement scale (<em>Strongly Disagree</em> to <em>Strongly Agree</em>): <strong>Inattentive</strong>, <strong>Hyperactive</strong>, <strong>Impulsive</strong>, <strong>Executive Function</strong>, <strong>Emotional Sensitivity</strong>, and <strong>Hyperfocus</strong>.</p>
+      <p><strong>Instructions:</strong> Rate each statement below based on how accurately it describes your typical habits, focus, and natural rhythm. Switch between TestLibrary's default <strong>Quick 20-Item Mode</strong> (4 pages of 5 statements) or the <strong>Full 100-Item Question Bank</strong> extracted from their database.</p>
+    </div>
+
+    <div class="controls-bar no-print">
+      <div class="mode-group" role="group" aria-label="Assessment Length">
+        <span class="mode-label">Test Mode:</span>
+        <button type="button" class="btn btn-sm" id="mode-20-btn" aria-pressed="true">Quick 20-Item Test (5 min)</button>
+        <button type="button" class="btn btn-sm" id="mode-100-btn" aria-pressed="false">Full 100-Item Bank</button>
+      </div>
+      <div class="mode-group">
+        <button type="button" class="btn btn-sm" id="view-toggle-btn" aria-pressed="false">Show All on 1 Page</button>
+        <button type="button" class="btn btn-sm" id="reset-btn">Clear Responses</button>
+      </div>
+    </div>
+
+    <div class="step-indicator no-print">
+      <span id="page-counter-label">Step 1 of 4 (5 statements per page)</span>
+      <span>Tip: Press <kbd>1</kbd>–<kbd>5</kbd> on a focused card to select an option</span>
+    </div>
+
+    <div id="live-announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
+    <form id="quiz-form" action="#results-region" method="POST" novalidate>
+      <div id="questions-container"></div>
+
+      <div class="nav-bar">
+        <div>
+          <button type="button" class="btn" id="prev-page-btn" enterkeyhint="previous">Previous Page</button>
+        </div>
+        <span id="validation-summary" role="alert" style="color: var(--error-text); font-weight: 600;"></span>
+        <div style="display: flex; gap: 0.75rem;">
+          <button type="button" class="btn btn-primary" id="next-page-btn" enterkeyhint="next">Next Page</button>
+          <button type="submit" class="btn btn-primary" id="submit-btn">Generate Trait Report</button>
+        </div>
+      </div>
+    </form>
+
+    <div id="results-region" hidden></div>
+  </main>
+
+  <script>
+    const OPTIONS = [
+      { value: 0, label: "Strongly Disagree" },
+      { value: 1, label: "Disagree" },
+      { value: 2, label: "Neutral" },
+      { value: 3, label: "Agree" },
+      { value: 4, label: "Strongly Agree" }
+    ];
+
+    const TRAIT_META = {
+      Inattentive: {
+        label: "Inattentive",
+        desc: "Daydreaming, distractibility, losing track of details, and mental wandering during routine tasks."
+      },
+      Hyperactive: {
+        label: "Hyperactive",
+        desc: "Internal restlessness, high physical or nervous energy, fidgeting, and feeling driven by a motor."
+      },
+      Impulsive: {
+        label: "Impulsive",
+        desc: "Acting on spontaneity, interrupting conversations, impatience with waiting, and rapid decision-making."
+      },
+      Executive: {
+        label: "Executive Function",
+        desc: "Time blindness, task initiation friction, prioritization bottlenecks, and working-memory overload."
+      },
+      Emotional: {
+        label: "Emotional Sensitivity",
+        desc: "Intense emotional highs/lows, rapid frustration, rejection sensitivity, and strong empathy."
+      },
+      Hyperfocus: {
+        label: "Hyperfocus",
+        desc: "Deep flow states, intense productivity sprints, and total absorption when a subject sparks interest."
+      }
+    };
+
+    const ALL_QUESTIONS = [
+  {
+    "order": 1,
+    "trait": "Inattentive",
+    "statement": "I often find myself daydreaming during meetings or conversations.",
+    "freeTest": true
+  },
+  {
+    "order": 2,
+    "trait": "Hyperactive",
+    "statement": "I feel like I am \"driven by a motor\" most of the time.",
+    "freeTest": true
+  },
+  {
+    "order": 3,
+    "trait": "Impulsive",
+    "statement": "I often blurt out answers before a question has been finished.",
+    "freeTest": true
+  },
+  {
+    "order": 4,
+    "trait": "Executive",
+    "statement": "I struggle to estimate how much time a task will actually take.",
+    "freeTest": true
+  },
+  {
+    "order": 5,
+    "trait": "Emotional",
+    "statement": "I experience very high \"highs\" and very low \"lows.\"",
+    "freeTest": true
+  },
+  {
+    "order": 6,
+    "trait": "Hyperfocus",
+    "statement": "When I'm interested in something, I can focus for hours without stopping.",
+    "freeTest": true
+  },
+  {
+    "order": 7,
+    "trait": "Inattentive",
+    "statement": "I struggle to pay attention to details and make \"careless\" mistakes.",
+    "freeTest": true
+  },
+  {
+    "order": 8,
+    "trait": "Hyperactive",
+    "statement": "I find it extremely difficult to sit still for long periods.",
+    "freeTest": true
+  },
+  {
+    "order": 9,
+    "trait": "Impulsive",
+    "statement": "I find it difficult to wait my turn in lines or conversations.",
+    "freeTest": true
+  },
+  {
+    "order": 10,
+    "trait": "Executive",
+    "statement": "I am chronically late to appointments or social events.",
+    "freeTest": true
+  },
+  {
+    "order": 11,
+    "trait": "Emotional",
+    "statement": "I get frustrated or angry much more quickly than others.",
+    "freeTest": true
+  },
+  {
+    "order": 12,
+    "trait": "Hyperfocus",
+    "statement": "I often don't hear people calling my name when I'm focused.",
+    "freeTest": true
+  },
+  {
+    "order": 13,
+    "trait": "Inattentive",
+    "statement": "I find it difficult to stay focused on tasks that are repetitive or boring.",
+    "freeTest": true
+  },
+  {
+    "order": 14,
+    "trait": "Hyperactive",
+    "statement": "I am constantly fidgeting with my hands or feet.",
+    "freeTest": true
+  },
+  {
+    "order": 15,
+    "trait": "Impulsive",
+    "statement": "I often interrupt others while they are talking.",
+    "freeTest": true
+  },
+  {
+    "order": 16,
+    "trait": "Executive",
+    "statement": "I find it very hard to get started on a task if it feels overwhelming.",
+    "freeTest": true
+  },
+  {
+    "order": 17,
+    "trait": "Emotional",
+    "statement": "I am very sensitive to criticism or perceived rejection.",
+    "freeTest": true
+  },
+  {
+    "order": 18,
+    "trait": "Hyperfocus",
+    "statement": "I am capable of intense bursts of productivity on things I love.",
+    "freeTest": true
+  },
+  {
+    "order": 19,
+    "trait": "Inattentive",
+    "statement": "I often lose my keys, phone, or other daily essentials.",
+    "freeTest": false
+  },
+  {
+    "order": 20,
+    "trait": "Hyperactive",
+    "statement": "I often feel restless or \"on edge\" when I have nothing to do.",
+    "freeTest": false
+  },
+  {
+    "order": 21,
+    "trait": "Impulsive",
+    "statement": "I make impulsive purchases that I later regret.",
+    "freeTest": false
+  },
+  {
+    "order": 22,
+    "trait": "Executive",
+    "statement": "I struggle to prioritize my to-do list effectively.",
+    "freeTest": true
+  },
+  {
+    "order": 23,
+    "trait": "Emotional",
+    "statement": "I find it hard to calm down once I am upset.",
+    "freeTest": true
+  },
+  {
+    "order": 24,
+    "trait": "Hyperfocus",
+    "statement": "I tend to become \"obsessed\" with a new hobby for a few weeks.",
+    "freeTest": false
+  },
+  {
+    "order": 25,
+    "trait": "Inattentive",
+    "statement": "I am easily distracted by noises or things happening around me.",
+    "freeTest": false
+  },
+  {
+    "order": 26,
+    "trait": "Hyperactive",
+    "statement": "I talk a lot and sometimes find it hard to stop.",
+    "freeTest": false
+  },
+  {
+    "order": 27,
+    "trait": "Impulsive",
+    "statement": "I often make big decisions without thinking through the consequences.",
+    "freeTest": false
+  },
+  {
+    "order": 28,
+    "trait": "Executive",
+    "statement": "I often lose track of time when I am doing something I enjoy.",
+    "freeTest": false
+  },
+  {
+    "order": 29,
+    "trait": "Emotional",
+    "statement": "My mood can change rapidly based on small events.",
+    "freeTest": false
+  },
+  {
+    "order": 30,
+    "trait": "Hyperfocus",
+    "statement": "I find it painful to be interrupted when I am \"in the zone.\"",
+    "freeTest": false
+  },
+  {
+    "order": 31,
+    "trait": "Inattentive",
+    "statement": "I often forget what I was saying in the middle of a sentence.",
+    "freeTest": false
+  },
+  {
+    "order": 32,
+    "trait": "Hyperactive",
+    "statement": "I often feel a physical need to move around or stretch.",
+    "freeTest": false
+  },
+  {
+    "order": 33,
+    "trait": "Impulsive",
+    "statement": "I struggle with self-control when it comes to snacks or habits.",
+    "freeTest": false
+  },
+  {
+    "order": 34,
+    "trait": "Executive",
+    "statement": "I find it difficult to keep my living or workspace tidy.",
+    "freeTest": false
+  },
+  {
+    "order": 35,
+    "trait": "Emotional",
+    "statement": "I feel emotions very intensely in my body.",
+    "freeTest": false
+  },
+  {
+    "order": 36,
+    "trait": "Hyperfocus",
+    "statement": "I lose all sense of time when I am working on a creative task.",
+    "freeTest": false
+  },
+  {
+    "order": 37,
+    "trait": "Inattentive",
+    "statement": "I find it hard to follow multi-step instructions without getting lost.",
+    "freeTest": false
+  },
+  {
+    "order": 38,
+    "trait": "Hyperactive",
+    "statement": "I am known for having a lot of \"nervous energy.\"",
+    "freeTest": false
+  },
+  {
+    "order": 39,
+    "trait": "Impulsive",
+    "statement": "I jump into new projects without reading instructions first.",
+    "freeTest": false
+  },
+  {
+    "order": 40,
+    "trait": "Executive",
+    "statement": "I struggle to break large projects down into smaller steps.",
+    "freeTest": false
+  },
+  {
+    "order": 41,
+    "trait": "Emotional",
+    "statement": "I am often described as being \"too sensitive\" or \"dramatic.\"",
+    "freeTest": false
+  },
+  {
+    "order": 42,
+    "trait": "Hyperfocus",
+    "statement": "I can learn a new skill very quickly if it fascinates me.",
+    "freeTest": false
+  },
+  {
+    "order": 43,
+    "trait": "Inattentive",
+    "statement": "I often zone out even when someone is speaking directly to me.",
+    "freeTest": false
+  },
+  {
+    "order": 44,
+    "trait": "Hyperactive",
+    "statement": "I find quiet environments (like libraries) to be uncomfortable.",
+    "freeTest": false
+  },
+  {
+    "order": 45,
+    "trait": "Impulsive",
+    "statement": "I find it hard to resist an immediate reward for a better later one.",
+    "freeTest": false
+  },
+  {
+    "order": 46,
+    "trait": "Executive",
+    "statement": "I often miss deadlines despite my best intentions.",
+    "freeTest": false
+  },
+  {
+    "order": 47,
+    "trait": "Emotional",
+    "statement": "I struggle to hide my emotions from others.",
+    "freeTest": false
+  },
+  {
+    "order": 48,
+    "trait": "Hyperfocus",
+    "statement": "I have \"rabbit holed\" into research for hours late at night.",
+    "freeTest": false
+  },
+  {
+    "order": 49,
+    "trait": "Inattentive",
+    "statement": "I struggle to finish one task before moving on to the next.",
+    "freeTest": false
+  },
+  {
+    "order": 50,
+    "trait": "Hyperactive",
+    "statement": "I often pace around the room while on the phone or thinking.",
+    "freeTest": false
+  },
+  {
+    "order": 51,
+    "trait": "Impulsive",
+    "statement": "I often say things I regret in the heat of the moment.",
+    "freeTest": false
+  },
+  {
+    "order": 52,
+    "trait": "Executive",
+    "statement": "I find it hard to switch between different tasks or topics.",
+    "freeTest": false
+  },
+  {
+    "order": 53,
+    "trait": "Emotional",
+    "statement": "I get overwhelmed by large crowds or high-stress environments.",
+    "freeTest": false
+  },
+  {
+    "order": 54,
+    "trait": "Hyperfocus",
+    "statement": "I find it hard to stop an activity even when I am exhausted.",
+    "freeTest": false
+  },
+  {
+    "order": 55,
+    "trait": "Inattentive",
+    "statement": "My mind feels like it has 20 tabs open at the same time.",
+    "freeTest": false
+  },
+  {
+    "order": 56,
+    "trait": "Hyperactive",
+    "statement": "I have trouble relaxing or \"winding down\" at the end of the day.",
+    "freeTest": false
+  },
+  {
+    "order": 57,
+    "trait": "Impulsive",
+    "statement": "I change my mind or my plans very suddenly.",
+    "freeTest": false
+  },
+  {
+    "order": 58,
+    "trait": "Executive",
+    "statement": "I struggle to remember what I need at the store without a list.",
+    "freeTest": false
+  },
+  {
+    "order": 59,
+    "trait": "Emotional",
+    "statement": "I often feel impatient and irritable with others.",
+    "freeTest": false
+  },
+  {
+    "order": 60,
+    "trait": "Hyperfocus",
+    "statement": "My focus is either 0% or 100%\u2014there is no in-between.",
+    "freeTest": false
+  },
+  {
+    "order": 61,
+    "trait": "Inattentive",
+    "statement": "I often avoid tasks that require a lot of sustained mental effort.",
+    "freeTest": false
+  },
+  {
+    "order": 62,
+    "trait": "Hyperactive",
+    "statement": "I am always on the go, as if I'm trying to catch up with my thoughts.",
+    "freeTest": false
+  },
+  {
+    "order": 63,
+    "trait": "Impulsive",
+    "statement": "I find waiting for results or responses to be agonizing.",
+    "freeTest": false
+  },
+  {
+    "order": 64,
+    "trait": "Executive",
+    "statement": "I often wait until the very last minute to start a project.",
+    "freeTest": false
+  },
+  {
+    "order": 65,
+    "trait": "Emotional",
+    "statement": "I am prone to \"emotional outbursts\" when stressed.",
+    "freeTest": false
+  },
+  {
+    "order": 66,
+    "trait": "Hyperfocus",
+    "statement": "I am very good at solving complex problems when they interest me.",
+    "freeTest": false
+  },
+  {
+    "order": 67,
+    "trait": "Inattentive",
+    "statement": "I find it hard to stay organized at home or at work.",
+    "freeTest": false
+  },
+  {
+    "order": 68,
+    "trait": "Hyperactive",
+    "statement": "I find it hard to stay seated during movies or long dinners.",
+    "freeTest": false
+  },
+  {
+    "order": 69,
+    "trait": "Impulsive",
+    "statement": "I often finish other people's sentences for them.",
+    "freeTest": false
+  },
+  {
+    "order": 70,
+    "trait": "Executive",
+    "statement": "I find managing my personal finances to be very stressful.",
+    "freeTest": false
+  },
+  {
+    "order": 71,
+    "trait": "Emotional",
+    "statement": "I find it hard to stay motivated if I don't feel immediate success.",
+    "freeTest": false
+  },
+  {
+    "order": 72,
+    "trait": "Hyperfocus",
+    "statement": "I often neglect other responsibilities when I'm focused on a goal.",
+    "freeTest": false
+  },
+  {
+    "order": 73,
+    "trait": "Inattentive",
+    "statement": "I often forget appointments or social plans.",
+    "freeTest": false
+  },
+  {
+    "order": 74,
+    "trait": "Hyperactive",
+    "statement": "I often tap my pen or bounce my leg without realizing it.",
+    "freeTest": false
+  },
+  {
+    "order": 75,
+    "trait": "Impulsive",
+    "statement": "I am prone to \"doom-scrolling\" or jumping between apps.",
+    "freeTest": false
+  },
+  {
+    "order": 76,
+    "trait": "Executive",
+    "statement": "I struggle to follow through on plans I made for myself.",
+    "freeTest": false
+  },
+  {
+    "order": 77,
+    "trait": "Emotional",
+    "statement": "I often worry about things excessively.",
+    "freeTest": false
+  },
+  {
+    "order": 78,
+    "trait": "Hyperfocus",
+    "statement": "I feel a sense of \"flow\" that makes everything else disappear.",
+    "freeTest": false
+  },
+  {
+    "order": 79,
+    "trait": "Inattentive",
+    "statement": "I get bored very quickly once the \"novelty\" wears off.",
+    "freeTest": false
+  },
+  {
+    "order": 80,
+    "trait": "Hyperactive",
+    "statement": "I tend to be the most energetic person in the room.",
+    "freeTest": false
+  },
+  {
+    "order": 81,
+    "trait": "Impulsive",
+    "statement": "I struggle to stick to a budget or a long-term plan.",
+    "freeTest": false
+  },
+  {
+    "order": 82,
+    "trait": "Executive",
+    "statement": "I often feel overwhelmed by the number of small tasks I have.",
+    "freeTest": false
+  },
+  {
+    "order": 83,
+    "trait": "Emotional",
+    "statement": "I feel a strong sense of injustice when things aren't fair.",
+    "freeTest": false
+  },
+  {
+    "order": 84,
+    "trait": "Hyperfocus",
+    "statement": "I have a deep passion for specific subjects or collections.",
+    "freeTest": false
+  },
+  {
+    "order": 85,
+    "trait": "Inattentive",
+    "statement": "I find it difficult to listen for long periods without wandering.",
+    "freeTest": false
+  },
+  {
+    "order": 86,
+    "trait": "Hyperactive",
+    "statement": "I get frustrated when things or people move too slowly.",
+    "freeTest": false
+  },
+  {
+    "order": 87,
+    "trait": "Impulsive",
+    "statement": "I often take risks just for the thrill of it.",
+    "freeTest": false
+  },
+  {
+    "order": 88,
+    "trait": "Executive",
+    "statement": "I find it hard to organize my thoughts into a clear plan.",
+    "freeTest": false
+  },
+  {
+    "order": 89,
+    "trait": "Emotional",
+    "statement": "I find it difficult to \"let go\" of minor annoyances.",
+    "freeTest": false
+  },
+  {
+    "order": 90,
+    "trait": "Hyperfocus",
+    "statement": "I find it easier to work in intense sprints than steady sessions.",
+    "freeTest": false
+  },
+  {
+    "order": 91,
+    "trait": "Inattentive",
+    "statement": "I often leave tasks about 90% finished.",
+    "freeTest": false
+  },
+  {
+    "order": 92,
+    "trait": "Hyperactive",
+    "statement": "I often feel a surge of energy late at night.",
+    "freeTest": false
+  },
+  {
+    "order": 93,
+    "trait": "Impulsive",
+    "statement": "I find it hard to hold back my opinions, even when inappropriate.",
+    "freeTest": false
+  },
+  {
+    "order": 94,
+    "trait": "Executive",
+    "statement": "I often forget to reply to messages or emails.",
+    "freeTest": false
+  },
+  {
+    "order": 95,
+    "trait": "Emotional",
+    "statement": "I am very empathetic to the feelings of those around me.",
+    "freeTest": false
+  },
+  {
+    "order": 96,
+    "trait": "Hyperfocus",
+    "statement": "I feel extremely productive when working on a personal interest.",
+    "freeTest": false
+  },
+  {
+    "order": 97,
+    "trait": "Inattentive",
+    "statement": "I struggle to remember names or specific dates.",
+    "freeTest": false
+  },
+  {
+    "order": 98,
+    "trait": "Hyperactive",
+    "statement": "I feel restless if I have to stay in one place for too long.",
+    "freeTest": false
+  },
+  {
+    "order": 99,
+    "trait": "Executive",
+    "statement": "I struggle with \"mental fog\" when I have too many options.",
+    "freeTest": false
+  },
+  {
+    "order": 100,
+    "trait": "Inattentive",
+    "statement": "I often forget to do routine chores like laundry or dishes.",
+    "freeTest": false
+  }
+];
+
+    const STORAGE_KEY = "testlibrary_adhd_responses_v1";
+    const THEME_KEY = "adhd_assessment_theme_v1";
+    const PAGE_SIZE = 5;
+
+    let mode = "quick20";
+    let showAllPages = false;
+    let currentPage = 0;
+    let responses = {};
+
+    const questionsContainer = document.getElementById("questions-container");
+    const progressEl = document.getElementById("completion-progress");
+    const progressText = document.getElementById("progress-text");
+    const pageCounterLabel = document.getElementById("page-counter-label");
+    const prevPageBtn = document.getElementById("prev-page-btn");
+    const nextPageBtn = document.getElementById("next-page-btn");
+    const submitBtn = document.getElementById("submit-btn");
+    const mode20Btn = document.getElementById("mode-20-btn");
+    const mode100Btn = document.getElementById("mode-100-btn");
+    const viewToggleBtn = document.getElementById("view-toggle-btn");
+    const resetBtn = document.getElementById("reset-btn");
+    const validationSummary = document.getElementById("validation-summary");
+    const resultsRegion = document.getElementById("results-region");
+    const liveAnnouncer = document.getElementById("live-announcer");
+    const form = document.getElementById("quiz-form");
+    const themeBtns = document.querySelectorAll(".theme-btn");
+
+    function applyTheme(themeName, announce = false) {
+      document.documentElement.setAttribute("data-theme", themeName);
+      themeBtns.forEach((btn) => {
+        btn.setAttribute("aria-pressed", String(btn.dataset.themeVal === themeName));
+      });
+      try {
+        localStorage.setItem(THEME_KEY, themeName);
+      } catch (e) {}
+      if (announce) {
+        liveAnnouncer.textContent = `Theme changed to ${themeName}.`;
+      }
+    }
+
+    themeBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        applyTheme(btn.dataset.themeVal, true);
+      });
+    });
+
+    function initTheme() {
+      try {
+        const savedTheme = localStorage.getItem(THEME_KEY);
+        if (savedTheme && ["botanical", "obsidian", "editorial", "contrast"].includes(savedTheme)) {
+          applyTheme(savedTheme, false);
+        }
+      } catch (e) {}
+    }
+
+    function getActiveQuestions() {
+      if (mode === "quick20") {
+        return ALL_QUESTIONS.filter((q) => q.freeTest);
+      }
+      return ALL_QUESTIONS;
+    }
+
+    function loadSavedState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === "object") {
+            responses = parsed;
+          }
+        }
+      } catch (e) {}
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+      } catch (e) {}
+    }
+
+    function updateProgressUI() {
+      const activeQs = getActiveQuestions();
+      const total = activeQs.length;
+      const answeredCount = activeQs.filter((q) => responses[q.order] !== undefined).length;
+
+      progressEl.max = total;
+      progressEl.value = answeredCount;
+      progressEl.textContent = `${Math.round((answeredCount / total) * 100)}%`;
+      progressText.textContent = `${answeredCount} / ${total} answered`;
+
+      const totalPages = Math.ceil(total / PAGE_SIZE);
+      if (showAllPages) {
+        pageCounterLabel.textContent = `Showing all ${total} statements`;
+        prevPageBtn.hidden = true;
+        nextPageBtn.hidden = true;
+        submitBtn.hidden = false;
+      } else {
+        pageCounterLabel.textContent = `Step ${currentPage + 1} of ${totalPages} (${PAGE_SIZE} statements per page)`;
+        prevPageBtn.hidden = currentPage === 0;
+        const isLastPage = currentPage >= totalPages - 1;
+        nextPageBtn.hidden = isLastPage;
+        submitBtn.hidden = !isLastPage;
+      }
+    }
+
+    function renderVisibleQuestions() {
+      const activeQs = getActiveQuestions();
+      const visibleQs = showAllPages
+        ? activeQs
+        : activeQs.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);
+
+      questionsContainer.innerHTML = "";
+
+      visibleQs.forEach((q, idx) => {
+        const displayNum = showAllPages ? idx + 1 : currentPage * PAGE_SIZE + idx + 1;
+        const savedVal = responses[q.order];
+        const card = document.createElement("div");
+        card.className = `question-card ${savedVal !== undefined ? "answered" : ""}`;
+        card.id = `card-q${q.order}`;
+        card.dataset.qorder = q.order;
+
+        const errId = `err-q${q.order}`;
+        const optionsHtml = OPTIONS.map((opt) => {
+          const inputId = `q${q.order}-opt${opt.value}`;
+          const checkedAttr = savedVal === opt.value ? "checked" : "";
+          return `
+            <label for="${inputId}" class="option-label">
+              <input
+                type="radio"
+                id="${inputId}"
+                name="q${q.order}"
+                value="${opt.value}"
+                ${checkedAttr}
+                required
+                aria-describedby="${errId}"
+              >
+              <span>${opt.label}</span>
+            </label>
+          `;
+        }).join("");
+
+        card.innerHTML = `
+          <fieldset>
+            <legend>
+              <span><span class="q-num">${displayNum}.</span> ${q.statement}</span>
+              <span class="trait-pill trait-${q.trait}">${TRAIT_META[q.trait].label}</span>
+            </legend>
+            <div class="options-grid">
+              ${optionsHtml}
+            </div>
+            <div id="${errId}" class="error-msg">⚠ Please select an option for statement ${displayNum}.</div>
+          </fieldset>
+        `;
+
+        questionsContainer.appendChild(card);
+      });
+
+      updateProgressUI();
+    }
+
+    function validateCurrentSlice(sliceQs) {
+      const missing = sliceQs.filter((q) => responses[q.order] === undefined);
+      if (missing.length > 0) {
+        missing.forEach((q) => {
+          const card = document.getElementById(`card-q${q.order}`);
+          if (card) card.classList.add("unanswered-error");
+        });
+        validationSummary.textContent = `⚠ Please answer all statements on this page (${missing.length} remaining).`;
+        const firstInput = document.getElementById(`q${missing[0].order}-opt0`);
+        if (firstInput) {
+          firstInput.focus();
+          document.getElementById(`card-q${missing[0].order}`).scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        return false;
+      }
+      validationSummary.textContent = "";
+      return true;
+    }
+
+    form.addEventListener("input", (e) => {
+      if (e.target.matches('input[type="radio"]')) {
+        const qorder = Number(e.target.name.replace("q", ""));
+        responses[qorder] = Number(e.target.value);
+        const card = document.getElementById(`card-q${qorder}`);
+        if (card) {
+          card.classList.add("answered");
+          card.classList.remove("unanswered-error");
+        }
+        validationSummary.textContent = "";
+        saveState();
+        updateProgressUI();
+      }
+    });
+
+    form.addEventListener("keydown", (e) => {
+      if (["1", "2", "3", "4", "5"].includes(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        const card = e.target.closest(".question-card");
+        if (!card) return;
+        const qorder = Number(card.dataset.qorder);
+        const val = Number(e.key) - 1;
+        const radio = document.getElementById(`q${qorder}-opt${val}`);
+        if (radio) {
+          e.preventDefault();
+          radio.checked = true;
+          radio.focus();
+          responses[qorder] = val;
+          card.classList.add("answered");
+          card.classList.remove("unanswered-error");
+          saveState();
+          updateProgressUI();
+        }
+      }
+    });
+
+    prevPageBtn.addEventListener("click", () => {
+      if (currentPage > 0) {
+        currentPage--;
+        validationSummary.textContent = "";
+        renderVisibleQuestions();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+
+    nextPageBtn.addEventListener("click", () => {
+      const activeQs = getActiveQuestions();
+      const sliceQs = activeQs.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);
+      if (!validateCurrentSlice(sliceQs)) return;
+
+      const totalPages = Math.ceil(activeQs.length / PAGE_SIZE);
+      if (currentPage < totalPages - 1) {
+        currentPage++;
+        renderVisibleQuestions();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        const firstRadio = questionsContainer.querySelector('input[type="radio"]');
+        if (firstRadio) firstRadio.focus({ preventScroll: true });
+      }
+    });
+
+    mode20Btn.addEventListener("click", () => {
+      mode = "quick20";
+      currentPage = 0;
+      mode20Btn.setAttribute("aria-pressed", "true");
+      mode100Btn.setAttribute("aria-pressed", "false");
+      validationSummary.textContent = "";
+      renderVisibleQuestions();
+      liveAnnouncer.textContent = "Switched to Quick 20-Item Test mode.";
+    });
+
+    mode100Btn.addEventListener("click", () => {
+      mode = "full100";
+      currentPage = 0;
+      mode100Btn.setAttribute("aria-pressed", "true");
+      mode20Btn.setAttribute("aria-pressed", "false");
+      validationSummary.textContent = "";
+      renderVisibleQuestions();
+      liveAnnouncer.textContent = "Switched to Full 100-Item Question Bank mode.";
+    });
+
+    viewToggleBtn.addEventListener("click", () => {
+      showAllPages = !showAllPages;
+      viewToggleBtn.setAttribute("aria-pressed", String(showAllPages));
+      viewToggleBtn.textContent = showAllPages ? "Use 5-Per-Page Steps" : "Show All on 1 Page";
+      validationSummary.textContent = "";
+      renderVisibleQuestions();
+    });
+
+    resetBtn.addEventListener("click", () => {
+      if (!confirm("Clear all saved answers and reset the trait test?")) return;
+      responses = {};
+      currentPage = 0;
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      validationSummary.textContent = "";
+      resultsRegion.hidden = true;
+      resultsRegion.innerHTML = "";
+      document.title = "TestLibrary 6-Dimension ADHD Trait Profile (Paywall-Free)";
+      renderVisibleQuestions();
+      liveAnnouncer.textContent = "All responses cleared.";
+    });
+
+    function buildRadarSvg(traitScores) {
+      const keys = ["Inattentive", "Hyperactive", "Impulsive", "Executive", "Emotional", "Hyperfocus"];
+      const cx = 150, cy = 140, maxR = 95;
+      const levels = [0.25, 0.5, 0.75, 1.0];
+
+      const angleFor = (i) => (Math.PI * 2 * i) / keys.length - Math.PI / 2;
+      const pt = (r, i) => {
+        const a = angleFor(i);
+        return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+      };
+
+      const gridPolys = levels.map((lvl) => {
+        const pts = keys.map((_, i) => pt(maxR * lvl, i).join(",")).join(" ");
+        return `<polygon points="${pts}" fill="none" stroke="var(--border-color)" stroke-width="1" stroke-dasharray="${lvl < 1 ? "3,3" : "none"}" />`;
+      }).join("");
+
+      const axes = keys.map((k, i) => {
+        const [x, y] = pt(maxR, i);
+        const [lx, ly] = pt(maxR + 24, i);
+        return `
+          <line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="var(--border-color)" stroke-width="1" />
+          <text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" fill="var(--text-main)" font-size="11" font-weight="600">${TRAIT_META[k].label.split(" ")[0]}</text>
+        `;
+      }).join("");
+
+      const dataPts = keys.map((k, i) => {
+        const pct = (traitScores[k]?.pct || 0) / 100;
+        return pt(maxR * Math.max(0.05, pct), i).join(",");
+      }).join(" ");
+
+      const dots = keys.map((k, i) => {
+        const pct = (traitScores[k]?.pct || 0) / 100;
+        const [x, y] = pt(maxR * Math.max(0.05, pct), i);
+        return `<circle cx="${x}" cy="${y}" r="4.5" fill="var(--brand-color)" />`;
+      }).join("");
+
+      return `
+        <svg role="img" aria-label="6-Axis ADHD Trait Radar Chart" viewBox="0 0 300 280" width="290" height="270">
+          <title>6-Dimension ADHD Trait Radar Chart</title>
+          ${gridPolys}
+          ${axes}
+          <polygon points="${dataPts}" fill="var(--bg-selected)" fill-opacity="0.7" stroke="var(--brand-color)" stroke-width="2.5" />
+          ${dots}
+        </svg>
+      `;
+    }
+
+    function computeReport() {
+      const activeQs = getActiveQuestions();
+      const traitTotals = {};
+      Object.keys(TRAIT_META).forEach((k) => {
+        traitTotals[k] = { raw: 0, max: 0, count: 0, pct: 0 };
+      });
+
+      let overallRaw = 0;
+      const overallMax = activeQs.length * 4;
+
+      activeQs.forEach((q) => {
+        const val = responses[q.order] ?? 0;
+        overallRaw += val;
+        const t = traitTotals[q.trait];
+        t.raw += val;
+        t.max += 4;
+        t.count += 1;
+      });
+
+      Object.keys(traitTotals).forEach((k) => {
+        const t = traitTotals[k];
+        t.pct = t.max > 0 ? Math.round((t.raw / t.max) * 100) : 0;
+      });
+
+      const overallPct = Math.round((overallRaw / overallMax) * 100);
+      const sortedTraits = Object.entries(traitTotals).sort((a, b) => b[1].pct - a[1].pct);
+      const top1 = sortedTraits[0][0];
+      const top2 = sortedTraits[1][0];
+
+      let intensityBand = "Low Trait Expression (0–34%)";
+      if (overallPct >= 75) intensityBand = "High Trait Expression (75–100%)";
+      else if (overallPct >= 55) intensityBand = "Elevated Trait Expression (55–74%)";
+      else if (overallPct >= 35) intensityBand = "Moderate Trait Expression (35–54%)";
+
+      return {
+        modeLabel: mode === "quick20" ? "Quick 20-Item Profile" : "Full 100-Item Profile",
+        totalItems: activeQs.length,
+        overallRaw,
+        overallMax,
+        overallPct,
+        intensityBand,
+        top1,
+        top2,
+        traitTotals,
+        sortedTraits,
+        activeQs,
+        timestamp: new Date().toLocaleString()
+      };
+    }
+
+    function renderReport(rep) {
+      const radarSvg = buildRadarSvg(rep.traitTotals);
+
+      const traitCardsHtml = rep.sortedTraits.map(([key, stats]) => {
+        const meta = TRAIT_META[key];
+        return `
+          <div class="trait-card">
+            <div class="trait-card-header">
+              <span class="trait-card-title" style="color: var(--c-${key.toLowerCase()});">${meta.label}</span>
+              <span class="trait-card-pct">${stats.pct}%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width: ${stats.pct}%; background: var(--c-${key.toLowerCase()});"></div>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-block-start: 0.35rem;">
+              Raw Score: ${stats.raw} / ${stats.max} (${stats.count} items)
+            </div>
+            <p class="trait-card-desc">${meta.desc}</p>
+          </div>
+        `;
+      }).join("");
+
+      const tableRowsHtml = rep.activeQs.map((q, i) => {
+        const val = responses[q.order];
+        return `
+          <tr>
+            <th scope="row">#${i + 1} (Bank Q${q.order})</th>
+            <td>${q.statement}</td>
+            <td><span class="trait-pill trait-${q.trait}">${TRAIT_META[q.trait].label}</span></td>
+            <td><strong>${OPTIONS[val].label}</strong> (${val}/4)</td>
+          </tr>
+        `;
+      }).join("");
+
+      resultsRegion.innerHTML = `
+        <div class="results-card" id="results-card" tabindex="-1">
+          <div class="results-header">
+            <div>
+              <h2>Your 6-Dimension ADHD Trait Report</h2>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">${rep.modeLabel} &bull; Completed ${rep.timestamp}</span>
+            </div>
+            <div class="no-print" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="btn btn-sm" id="copy-txt-btn">Copy Plain Text</button>
+              <button type="button" class="btn btn-primary btn-sm" id="print-btn">Print / Save PDF</button>
+            </div>
+          </div>
+
+          <div class="profile-hero">
+            <div class="archetype-box">
+              <div class="archetype-tag">Dominant Trait Signature</div>
+              <h3 class="archetype-title">${TRAIT_META[rep.top1].label} + ${TRAIT_META[rep.top2].label}</h3>
+              <p class="archetype-desc">
+                Your overall ADHD trait intensity is <strong>${rep.overallPct}%</strong> (${rep.overallRaw}/${rep.overallMax} raw points — <em>${rep.intensityBand}</em>).
+                Your strongest trait dimensions are <strong>${TRAIT_META[rep.top1].label} (${rep.traitTotals[rep.top1].pct}%)</strong> and <strong>${TRAIT_META[rep.top2].label} (${rep.traitTotals[rep.top2].pct}%)</strong>.
+              </p>
+              <p class="archetype-desc" style="margin-block-end: 0; font-size: 0.85rem;">
+                <strong>Note:</strong> Unlike the 18-item WHO ASRS v1.1 clinical screener, TestLibrary's 6-trait model adds non-DSM dimensions (<em>Executive Function</em>, <em>Emotional Sensitivity</em>, and <em>Hyperfocus</em>) to map everyday cognitive style.
+              </p>
+            </div>
+            <div class="radar-wrap">
+              ${radarSvg}
+            </div>
+          </div>
+
+          <div class="traits-grid">
+            ${traitCardsHtml}
+          </div>
+
+          <div class="summary-table-wrap">
+            <table>
+              <caption>Statement-by-Statement Breakdown (${rep.totalItems} Items)</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Statement</th>
+                  <th scope="col">Trait Dimension</th>
+                  <th scope="col">Your Rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${tableRowsHtml}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      resultsRegion.hidden = false;
+      document.title = `Trait Report (${rep.overallPct}%) | TestLibrary ADHD Trait Test`;
+
+      const card = document.getElementById("results-card");
+      card.scrollIntoView({ behavior: "smooth", block: "start" });
+      card.focus({ preventScroll: true });
+
+      document.getElementById("print-btn").addEventListener("click", () => window.print());
+
+      document.getElementById("copy-txt-btn").addEventListener("click", (e) => {
+        const lines = [
+          `TestLibrary 6-Dimension ADHD Trait Report (${rep.modeLabel})`,
+          `Completed: ${rep.timestamp}`,
+          ``,
+          `Overall Trait Score: ${rep.overallPct}% (${rep.overallRaw}/${rep.overallMax}) - ${rep.intensityBand}`,
+          `Dominant Signature: ${TRAIT_META[rep.top1].label} + ${TRAIT_META[rep.top2].label}`,
+          ``,
+          `Trait Breakdown:`,
+          ...rep.sortedTraits.map(([k, s]) => `- ${TRAIT_META[k].label}: ${s.pct}% (${s.raw}/${s.max} across ${s.count} items)`),
+          ``,
+          `Responses:`,
+          ...rep.activeQs.map((q, idx) => `${idx + 1}. [${TRAIT_META[q.trait].label}] ${OPTIONS[responses[q.order]].label} (${responses[q.order]}/4) - ${q.statement}`)
+        ];
+        navigator.clipboard.writeText(lines.join("\n")).then(() => {
+          const btn = e.currentTarget;
+          btn.textContent = "Copied!";
+          liveAnnouncer.textContent = "Report copied to clipboard.";
+          setTimeout(() => { btn.textContent = "Copy Plain Text"; }, 2000);
+        });
+      });
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const activeQs = getActiveQuestions();
+      if (!validateCurrentSlice(activeQs)) {
+        if (!showAllPages) {
+          const firstMissingIdx = activeQs.findIndex((q) => responses[q.order] === undefined);
+          if (firstMissingIdx >= 0) {
+            currentPage = Math.floor(firstMissingIdx / PAGE_SIZE);
+            renderVisibleQuestions();
+            validateCurrentSlice(activeQs.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE));
+          }
+        }
+        return;
+      }
+      const rep = computeReport();
+      renderReport(rep);
+    });
+
+    initTheme();
+    loadSavedState();
+    renderVisibleQuestions();
+  </script>
+</body>
+</html>
